@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 3000
+const port = 3333
 
 
 let boardWidth = 7;
@@ -16,7 +16,7 @@ app.get('/', (request, response) =>
 	response.send('Hello from Express!')
 })
 
-app.get('/test', (req, response) =>
+app.post('/test', (req, response) =>
 {
 	response.send('You called test!!')
 })
