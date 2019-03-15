@@ -1,7 +1,7 @@
 # JPL Car Share Project
 
 
-![alt text](https://i.imgur.com/5dT1ajx.jpg "Placeholder")
+![alt text](https://media.istockphoto.com/photos/car-pooling-picture-id153070090?k=6&m=153070090&s=612x612&w=0&h=NAL9-mCW70t5Rtj5pW2I3TQEpRlNhY2rRUHYa2kcx6o= "Placeholder")
 
 ## Running the app
 ### To run the front end, type `npm start` in the root directory
