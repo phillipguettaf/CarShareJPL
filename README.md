@@ -1,7 +1,9 @@
 # JPL Car Share Project
 
 
-## Running the app:
+![alt text](https://i.imgur.com/5dT1ajx.jpg "Placeholder")
+
+## Running the app
 ### To run the front end, type `npm start` in the root directory
 
 Runs the app in the development mode.<br>
