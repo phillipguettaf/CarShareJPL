@@ -25,7 +25,8 @@ class JPLMap extends Component
 		return (
 			<div className="Bingmapcont">
 				<ReactBingmaps
-					bingmapKey = 'Ak4YC0ivePGISt6hRJCxFzEeCw67C2dnZV5lPncBzK7v4FOPaHjGrbbIoeww90mP'>
+					bingmapKey = 'Ak4YC0ivePGISt6hRJCxFzEeCw67C2dnZV5lPncBzK7v4FOPaHjGrbbIoeww90mP'
+					center = {[this.props.lat, this.props.long]} >
 				</ReactBingmaps>
 			</div>
 		);

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
 
 import { ReactBingmaps } from 'react-bingmaps';
@@ -15,6 +15,9 @@ class App extends Component {
     response: '',
     post: '',
     responseToPost: '',
+    latitude: null,
+    longitude: null,
+    error: null,
   };
   componentDidMount() {
     this.callApi()
@@ -39,14 +42,37 @@ class App extends Component {
     const body = await response.text();
     this.setState({ responseToPost: body });
   };
+
+componentDidMount() {
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      this.setState({
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+        error: null,
+      });
+    },
+    (error) => this.setState({error: error.message}),
+    { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
+  );
+}
+
 render() {
     return (
+
       <div className="App">
         <p>{this.state.response}</p>
         <form onSubmit={this.handleSubmit}>
           <p>
             <strong>Post to Server:</strong>
           </p>
+          <p>
+            Latitude: {this.state.latitude}
+          </p>
+          <p>
+            Longitude: {this.state.longitude}
+          </p>
+
           <input
             type="text"
             value={this.state.post}
@@ -55,9 +81,10 @@ render() {
           <button type="submit">Submit</button>
         </form>
         <p>{this.state.responseToPost}</p>
-		<JPLMap />
+		<JPLMap lat={this.state.latitude} long={this.state.longitude} />
       </div>
     );
   }
 }
+
 export default App;
