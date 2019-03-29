@@ -31,3 +31,10 @@
     transform: rotate(360deg);
   }
 }
+
+
+.react-bingmaps 
+{
+	width: 100% !important;
+	height: 800px !important;
+}
