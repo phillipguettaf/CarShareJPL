@@ -28,7 +28,7 @@ class Header extends Component
 	  			integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	  			crossorigin="anonymous" />
 
-				<Navbar bg="dark" expand="lg" variant="light" sticky="top">
+				<Navbar expand="lg" variant="light" sticky="top">
 					<Navbar.Brand>JPL Car Share</Navbar.Brand>
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Navbar.Collapse id="basic-navbar-nav">
