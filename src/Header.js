@@ -24,12 +24,12 @@ class Header extends Component
 		return (
 
 			<div className="Header">
-			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-  			integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-  			crossorigin="anonymous" />
+				<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	  			integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	  			crossorigin="anonymous" />
 
-				<Navbar bg="dark" expand="lg">
-					<Navbar.Brand>React-Bootstrap</Navbar.Brand>
+				<Navbar bg="dark" expand="lg" variant="light" sticky="top">
+					<Navbar.Brand>JPL Car Share</Navbar.Brand>
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Navbar.Collapse id="basic-navbar-nav">
 						<Nav className="mr-auto">
@@ -39,7 +39,7 @@ class Header extends Component
 								<NavDropdown.Item><Link to="/map">Maps</Link></NavDropdown.Item>
 								<NavDropdown.Item><Link to="/splash">Home (SplashScreen)</Link></NavDropdown.Item>
 								<NavDropdown.Divider />
-								<NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+								<NavDropdown.Item>Separated link</NavDropdown.Item>
 							</NavDropdown>
 						</Nav>
 						<Form inline>
