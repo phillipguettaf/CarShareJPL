@@ -3,6 +3,12 @@ import logo from './logo.svg';
 import './App.css';
 
 import { ReactBingmaps } from 'react-bingmaps';
+import 'react-geolocation';
+
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+
+import JPLMap from './JPLMap'
+
 
 class App extends Component {
   state = {
@@ -49,11 +55,7 @@ render() {
           <button type="submit">Submit</button>
         </form>
         <p>{this.state.responseToPost}</p>
-	<ReactBingmaps
-	    bingmapKey = 'Ak4YC0ivePGISt6hRJCxFzEeCw67C2dnZV5lPncBzK7v4FOPaHjGrbbIoeww90mP'
-	    center = {[13.0827, 80.2707]} >
-	</ReactBingmaps>
-
+		<JPLMap />
       </div>
     );
   }
