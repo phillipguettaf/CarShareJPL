@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  word-spacing: 0px !important;
 }
 
 .App-logo {
@@ -33,7 +34,7 @@
 }
 
 
-.react-bingmaps 
+.react-bingmaps
 {
 	width: 100% !important;
 	height: 800px !important;
