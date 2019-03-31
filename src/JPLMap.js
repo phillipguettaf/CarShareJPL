@@ -32,6 +32,11 @@ class JPLMap extends Component
 				latitude: position.coords.latitude,
 				longitude: position.coords.longitude,
 				error: null,
+				pushPins : [
+					{
+					  "location":[position.coords.latitude, position.coords.longitude], "option":{ color: 'yellow' }
+					}
+				],
 			});
 			},
 			(error) => this.setState({error: error.message}),
