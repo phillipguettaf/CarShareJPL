@@ -46,8 +46,10 @@ class JPLMap extends Component
 			<div className="Bingmapcont">
 				<ReactBingmaps
 					bingmapKey = 'Ak4YC0ivePGISt6hRJCxFzEeCw67C2dnZV5lPncBzK7v4FOPaHjGrbbIoeww90mP'
-					center = {[this.state.lat, this.state.long]} 
-					pushPins = {this.state.pushPins}>
+					//center = {[this.state.lat, this.state.long]} 
+					center = {[0,0]} 
+					pushPins = {this.state.pushPins}
+					>
 				</ReactBingmaps>
 			</div>
 		);
