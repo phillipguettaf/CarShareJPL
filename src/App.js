@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import { ReactBingmaps } from 'react-bingmaps';
-import 'react-geolocation';
 import { BrowserRouter as Router, Route, Link, Redirect} from 'react-router-dom';
 
 import JPLMap from './JPLMap'
