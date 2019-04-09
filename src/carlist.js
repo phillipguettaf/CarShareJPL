@@ -3,6 +3,8 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import Divider from '@material-ui/core/Divider';
+import { Pane } from 'evergreen-ui';
 import './CarList.css';
 
 
@@ -69,15 +71,22 @@ class CarList extends Component {
 	render(props) {
 		this.sortCars(this.state.userlat, this.state.userlong, this.state.cars);
 		const carlist = this.state.cars.map((car, rego)=>
-				<ListItem button><ListItemText primary={car.make}/></ListItem>
+				<ListItem button><ListItemText primary={car.make}/></ListItem> 
 				);
 		return (
 			
-			<div className="CarList">
+			<Pane CarList
+				elevation={0}
+			    float="left"
+			    backgroundColor="white"
+			    width={400}
+			    display="flex"
+			    flexDirection="column"
+			>
 				<List component="Cars">
 					{carlist}
 				</List>
-			</div>
+			</Pane>
 		);
 	}
 }

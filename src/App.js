@@ -6,6 +6,7 @@ import JPLMap from './JPLMap'
 import TextBox from './TextBox'
 import Header from './Header'
 import SplashScreen from './SplashScreen'
+import NavBar from './navbar'
 
 class App extends Component {
   state = {
@@ -18,8 +19,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+
         <Router>
-          <Header />
+          <NavBar/>
           <TextBox/>
           <Route path='/splash' component={SplashScreen} />
           <Route path='/map' component={JPLMap} />

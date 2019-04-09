@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import CarList from './CarList'
+import CarList from './CarList';
+import { Pane } from 'evergreen-ui';
 
 import { ReactBingmaps } from 'react-bingmaps';
 
@@ -64,24 +65,28 @@ class JPLMap extends Component
 	{
 		return (
 			
-			<div className="Bingmapcont">
-			<p>
-            Latitude: {this.state.latitude}
-			</p>
-			<p>
-				Longitude: {this.state.longitude}
-			</p>
-			<CarList userlat={this.state.latitude} userlat={this.state.longitude}/>
-			
-			{/* <button onClick={() => { this.onTap(this.state.latitude, this.state.longitude) }}>Frick</button> */}
-				<ReactBingmaps
-					bingmapKey = 'Ak4YC0ivePGISt6hRJCxFzEeCw67C2dnZV5lPncBzK7v4FOPaHjGrbbIoeww90mP'
-					//center = {[this.state.lat, this.state.long]} 
-					center = {[0,0]}
-					pushPins = {this.state.pushPins}
-					>
-				</ReactBingmaps>
-				</div>
+			<Pane Bingmapcont>
+				<p>
+	            Latitude: {this.state.latitude}
+				</p>
+				<p>
+					Longitude: {this.state.longitude}
+				</p>
+				<CarList userlat={this.state.latitude} userlat={this.state.longitude}/>
+				
+				{/* <button onClick={() => { this.onTap(this.state.latitude, this.state.longitude) }}>Frick</button> */}
+				<Pane
+					display="flex"
+				>	
+					<ReactBingmaps
+						bingmapKey = 'Ak4YC0ivePGISt6hRJCxFzEeCw67C2dnZV5lPncBzK7v4FOPaHjGrbbIoeww90mP'
+						//center = {[this.state.lat, this.state.long]} 
+						center = {[0,0]}
+						pushPins = {this.state.pushPins}
+						>
+					</ReactBingmaps>
+				</Pane>
+			</Pane>
 
 		);
 	}
