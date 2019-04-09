@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import CarList from './CarList'
 
 import { ReactBingmaps } from 'react-bingmaps';
 
@@ -70,6 +71,7 @@ class JPLMap extends Component
 			<p>
 				Longitude: {this.state.longitude}
 			</p>
+
 			{/* <button onClick={() => { this.onTap(this.state.latitude, this.state.longitude) }}>Frick</button> */}
 				<ReactBingmaps
 					bingmapKey = 'Ak4YC0ivePGISt6hRJCxFzEeCw67C2dnZV5lPncBzK7v4FOPaHjGrbbIoeww90mP'
@@ -78,7 +80,9 @@ class JPLMap extends Component
 					pushPins = {this.state.pushPins}
 					>
 				</ReactBingmaps>
+				<CarList userlat={this.state.latitude} userlat={this.state.longitude}/>
 			</div>
+
 		);
 	}
 }

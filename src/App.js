@@ -21,7 +21,6 @@ class App extends Component {
         <Router>
           <Header />
           <TextBox/>
-
           <Route path='/splash' component={SplashScreen} />
           <Route path='/map' component={JPLMap} />
 
