@@ -22,3 +22,10 @@ chrome-user-data
 .vscode
 *.swp
 *.swo
+node_modules/js-yaml/CHANGELOG.md
+	node_modules/js-yaml/dist/js-yaml.js
+	node_modules/js-yaml/dist/js-yaml.min.js
+	node_modules/js-yaml/lib/js-yaml/loader.js
+	node_modules/js-yaml/package.json
+	package-lock.json
+	package.json
