@@ -14,15 +14,12 @@ class JPLMap extends Component
 		error: null,
 		havePos: null,
 		//Empty array, to be filled by geolocation + db data
-		pushPins : [
-			{
-			 
-			}
-		],
+		pushPins : [{}],
 	};
 
 
 	componentWillMount() {
+
 		//navigator.geolocation.getCurrentPosition(
 		//watchPosition lets us update the pin for the user as they move + fixes displaying it!
 		this.watchId = navigator.geolocation.watchPosition(
@@ -32,10 +29,18 @@ class JPLMap extends Component
 				latitude: position.coords.latitude,
 				longitude: position.coords.longitude,
 				error: null,
+				//We need to update the car positions here too, I think.
 				pushPins : [
 					{
-						"location":[position.coords.latitude, position.coords.longitude], "option":{ color: 'red' },
-					}
+						"location":[position.coords.latitude, position.coords.longitude], "option":{ color: 'red' },	
+						
+					},
+					{
+						"location":[-37.8135, 144.9630], "option":{ color: 'green' },
+					},
+					{
+						"location":[-37.8146, 145.1341], "option":{ color: 'green' },
+					},
 				],
 			});
 			},
@@ -53,11 +58,11 @@ class JPLMap extends Component
 
 	/* onTap = (lat, long) => {
 		this.setState({
-			//pushPins:[...this.state.pushPins, {"location":[-37.8135, 144.9630], "option":{ color: 'green' }}]
-			pushPins:[...this.state.pushPins, {"location":[lat, long], "option":{ color: 'red' }}]
+			pushPins:[...this.state.pushPins, {"location":[-37.8135, 144.9630], "option":{ color: 'green' }}]
+			//pushPins:[...this.state.pushPins, {"location":[lat, long], "option":{ color: 'red' }}]
 		});
-	} */
-
+	}
+ */
 
 	render(props)
 	{
