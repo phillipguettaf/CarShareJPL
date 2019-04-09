@@ -15,25 +15,27 @@ class App extends Component {
     latitude: null,
     longitude: null,
     error: null,
+    pushPins : [
+			{
+			  "location":[-37.8136, 144.9631], "option":{ color: 'red' } //melbourne cbd
+			}
+		],
   };
 
 
-
-render() {
+  render() {
     return (
-	<div className="App">
-	<Router>
-		<Header />
-		<TextBox/>
+      <div className="App">
+        <Router>
+          <Header />
+          <TextBox/>
 
-		<Route path='/splash' component={SplashScreen} />
-		<Route path='/map' component={JPLMap} />
+          <Route path='/splash' component={SplashScreen} />
+          <Route path='/map' component={JPLMap} />
 
-		<Route exact path="/" component={() => <Redirect to="/splash" />}/>
-
-
-	</Router>
-	</div>
+          <Route exact path="/" component={() => <Redirect to="/splash" />}/>
+        </Router>
+      </div>
     );
   }
 }
