@@ -12,14 +12,6 @@ class App extends Component {
     response: '',
     post: '',
     responseToPost: '',
-    latitude: null,
-    longitude: null,
-    error: null,
-    pushPins : [
-			{
-			  "location":[-37.8136, 144.9631], "option":{ color: 'red' } //melbourne cbd
-			}
-		],
   };
 
 
