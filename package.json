@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^3.9.3",
+    "evergreen-ui": "^4.15.0",
     "material-ui": "^0.20.2",
     "react": "^16.8.4",
     "react-bingmaps": "^3.6.1",
