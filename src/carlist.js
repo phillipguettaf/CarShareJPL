@@ -71,7 +71,13 @@ class CarList extends Component {
 	render(props) {
 		this.sortCars(this.state.userlat, this.state.userlong, this.state.cars);
 		const carlist = this.state.cars.map((car, rego)=>
-				<ListItem button><ListItemText primary={car.make}/></ListItem> 
+				<ListItem button><ListItemText 
+					primary={car.make} 
+					secondary={Math.trunc(CarList.getDistance(this.state.userlat, 
+						this.state.userlong, 
+						car.latitude, 
+						car.longitude))/1000 + "km"}/>
+				</ListItem> 
 				);
 		return (
 			
