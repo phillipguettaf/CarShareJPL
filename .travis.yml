@@ -7,4 +7,4 @@ deploy:
         keyfile: "key.json"
         project: "jplcarshare"
         on:
-                branch: travis-test
+                branch: dev
