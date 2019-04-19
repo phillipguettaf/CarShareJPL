@@ -39,20 +39,6 @@ class TextBox extends Component
           this.setState({ responseToPost: body });
         };
 
-      componentDidMount() {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            this.setState({
-              latitude: position.coords.latitude,
-              longitude: position.coords.longitude,
-              error: null,
-            });
-          },
-          (error) => this.setState({error: error.message}),
-          { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
-        );
-      }
-
 	render(props)
 	{
 		return (

@@ -1,41 +1,34 @@
 import React, { Component } from 'react';
 import './App.css';
-import { ReactBingmaps } from 'react-bingmaps';
-import 'react-geolocation';
 import { BrowserRouter as Router, Route, Link, Redirect} from 'react-router-dom';
 
 import JPLMap from './JPLMap'
 import TextBox from './TextBox'
 import Header from './Header'
 import SplashScreen from './SplashScreen'
+import NavBar from './navbar'
 
 class App extends Component {
   state = {
     response: '',
     post: '',
     responseToPost: '',
-    latitude: null,
-    longitude: null,
-    error: null,
   };
 
 
-
-render() {
+  render() {
     return (
-	<div className="App">
-	<Router>
-		<Header />
-		<TextBox/>
+      <div className="App">
 
-		<Route path='/splash' component={SplashScreen} />
-		<Route path='/map' component={JPLMap} />
+        <Router>
+          <NavBar/>
+          <TextBox/>
+          <Route path='/splash' component={SplashScreen} />
+          <Route path='/map' component={JPLMap} />
 
-		<Route exact path="/" component={() => <Redirect to="/splash" />}/>
-
-
-	</Router>
-	</div>
+          <Route exact path="/" component={() => <Redirect to="/splash" />}/>
+        </Router>
+      </div>
     );
   }
 }
