@@ -21,7 +21,26 @@ class JPLMap extends Component
 			 
 			}
 		],
+		
+		infoBoxes :[
+				{
+				}
+        ],
+
+		cars: this.getCars()
 	};
+
+	getCars() {
+		//return knex.select().from('cars');
+		var cars = [
+			{ rego: '123456', make: 'Ford Falcon', latitude: 147, longitude: 31},
+			{ rego: '132456', make: 'Toyota Camry', latitude: 144, longitude: 33},
+			{ rego: '154326', make: 'Volkswagen Beetle', latitude: 143, longitude: 34},
+			{ rego: '543321', make: 'Mazda 3', latitude: 145, longitude: 32}
+		];
+
+		return cars;
+	}
 
 
 	componentWillMount() {
@@ -29,7 +48,7 @@ class JPLMap extends Component
 		//watchPosition lets us update the pin for the user as they move + fixes displaying it!
 		this.watchId = navigator.geolocation.watchPosition(
 			(position) => {
-			console.log(this);
+			//console.log(this);
 			this.setState({
 				latitude: position.coords.latitude,
 				longitude: position.coords.longitude,
@@ -37,12 +56,27 @@ class JPLMap extends Component
 				pushPins : [
 					{
 						"location":[position.coords.latitude, position.coords.longitude], "option":{ color: 'red' },
+						
+						//"location":[this.state.cars.latitude, this.state.cars.longitude], "option":{color: 'green'},
+					},
+				],
+
+				infoBoxes :// this.state.cars.map(car, key) = { "location":[car.latitude, car.longitude], "option":{title: 'pls', description: 'halp'}, }
+				
+				[
+					{
+						//"location":[this.state.cars.latitude, this.state.cars.longitude], "option":{ title: 'pls', description: '...' },
+						"location":[position.coords.latitude, position.coords.longitude], "option":{ title: 'pls', description: '...' },
 					}
 				],
 			});
 			},
 			(error) => this.setState({error: error.message}),
 			{ enableHighAccuracy: false, timeout: 20000, maximumAge: 1000},
+			/* this.setState({
+				pushPins: this.state.pushPins.concat({"location":[this.state.latitude, this.state.longitude], "option":{ color: 'green' }})
+			  }) */
+			//pushPins.concat([])
 		); 
 	}
 
@@ -72,7 +106,7 @@ class JPLMap extends Component
 				<p>
 					Longitude: {this.state.longitude}
 				</p>
-				<CarList userlat={this.state.latitude} userlat={this.state.longitude}/>
+				<CarList userlat={this.state.latitude} userlong={this.state.longitude}/>
 				
 				{/* <button onClick={() => { this.onTap(this.state.latitude, this.state.longitude) }}>Frick</button> */}
 				<Pane
@@ -83,6 +117,7 @@ class JPLMap extends Component
 						//center = {[this.state.lat, this.state.long]} 
 						center = {[0,0]}
 						pushPins = {this.state.pushPins}
+						infoboxes = {this.state.infoBoxes}
 						>
 					</ReactBingmaps>
 				</Pane>
