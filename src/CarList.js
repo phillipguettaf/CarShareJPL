@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
+import { Button, List, ListItem, ListItemIcon, ListItemText, ListItemSecondaryAction } from '@material-ui/core';
+import { EventSeat } from '@material-ui/icons';
 import { Pane } from 'evergreen-ui';
+
 import './CarList.css';
 
 
@@ -30,8 +28,6 @@ class CarList extends Component {
 		const SEMI_CIRCLE_DEGREES = 180;
 	    var radlat1 = Math.PI * lat1/SEMI_CIRCLE_DEGREES;
 	    var radlat2 = Math.PI * lat2/SEMI_CIRCLE_DEGREES;
-	    var radlon1 = Math.PI * lon1/SEMI_CIRCLE_DEGREES;
-	    var radlon2 = Math.PI * lon2/SEMI_CIRCLE_DEGREES;
 	    var theta = lon1-lon2;
 	    var radtheta = Math.PI * theta/SEMI_CIRCLE_DEGREES;
 	    var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
@@ -44,9 +40,13 @@ class CarList extends Component {
 
 	sortCars(userlat, userlong, cars) {
 
+		for (var car of cars)
+		{
+			car.distance = CarList.getDistance(userlat, userlong, car.latitude, car.longitude);
+		}
+
 		this.state.cars.sort(function(a,b) {
-			if (CarList.getDistance(userlat, userlong, a.latitude, a.longitude) <
-			 CarList.getDistance(userlat, userlong, b.latitude, b.longitude)) {
+			if (a.distance < b.distance) {
 				return -1;
 			} else {
 				return 1;
@@ -57,10 +57,10 @@ class CarList extends Component {
 	getCars() {
 		//return knex.select().from('cars');
 		var cars = [
-			{ rego: '123456', make: 'Ford Falcon', latitude: '147', longitude: '31'},
-			{ rego: '132456', make: 'Toyota Camry', latitude: '144', longitude: '33'},
-			{ rego: '154326', make: 'Volkswagen Beetle', latitude: '143', longitude: '34'},
-			{ rego: '543321', make: 'Mazda 3', latitude: '145', longitude: '32'}
+			{ rego: '123456', make: 'Ford Falcon', latitude: '147', longitude: '31', distance: null},
+			{ rego: '132456', make: 'Toyota Camry', latitude: '144', longitude: '33', distance: null},
+			{ rego: '154326', make: 'Volkswagen Beetle', latitude: '143', longitude: '34', distance: null},
+			{ rego: '543321', make: 'Mazda 3', latitude: '145', longitude: '32', distance: null}
 		];
 
 		return cars;
@@ -71,12 +71,16 @@ class CarList extends Component {
 	render(props) {
 		this.sortCars(this.state.userlat, this.state.userlong, this.state.cars);
 		const carlist = this.state.cars.map((car, rego)=>
-				<ListItem button><ListItemText 
+				<ListItem button>
+				<ListItemIcon>
+					<EventSeat />
+				</ListItemIcon>
+				<ListItemText 
 					primary={car.make} 
-					secondary={Math.trunc(CarList.getDistance(this.state.userlat, 
-						this.state.userlong, 
-						car.latitude, 
-						car.longitude))/1000 + "km"}/>
+					secondary={Math.trunc(car.distance)/1000 + "km"}/>
+				<ListItemSecondaryAction>
+					<Button>Book</Button>	
+				</ListItemSecondaryAction>
 				</ListItem> 
 				);
 		return (
@@ -84,7 +88,6 @@ class CarList extends Component {
 			<Pane CarList
 				elevation={0}
 			    float="left"
-			    backgroundColor="white"
 			    width={400}
 			    display="flex"
 			    flexDirection="column"
