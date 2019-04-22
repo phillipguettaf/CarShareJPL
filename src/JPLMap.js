@@ -21,11 +21,19 @@ class JPLMap extends Component
 			 
 			}
 		],
+
+		infoBoxes :				
+				[
+					{
+						//"location":[this.state.cars.latitude, this.state.cars.longitude], "option":{ title: 'pls', description: '...' },
+						"location":[-37.8109, 144.9644], "option":{title: 'pls', htmlContent: '<p> test </p>' }
+					}
+				],
 		
-		infoBoxes :[
+		/* infoBoxes :[
 				{
 				}
-        ],
+        ], */
 
 		cars: this.getCars()
 	};
@@ -60,15 +68,6 @@ class JPLMap extends Component
 						//"location":[this.state.cars.latitude, this.state.cars.longitude], "option":{color: 'green'},
 					},
 				],
-
-				infoBoxes :// this.state.cars.map(car, key) = { "location":[car.latitude, car.longitude], "option":{title: 'pls', description: 'halp'}, }
-				
-				[
-					{
-						//"location":[this.state.cars.latitude, this.state.cars.longitude], "option":{ title: 'pls', description: '...' },
-						"location":[position.coords.latitude, position.coords.longitude], "option":{ title: 'pls', description: '...' },
-					}
-				],
 			});
 			},
 			(error) => this.setState({error: error.message}),
@@ -80,8 +79,8 @@ class JPLMap extends Component
 		); 
 	}
 
-	/* componentDidMount() {
-	} */
+	componentDidMount() {
+	}
 
 	componentWillUnmount() {
     navigator.geolocation.clearWatch(this.watchId);
