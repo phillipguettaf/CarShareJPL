@@ -1,91 +1,52 @@
 import React, { Component } from 'react';
 import './App.css';
-import CarList from './CarList';
 import { Pane } from 'evergreen-ui';
 
 import { ReactBingmaps } from 'react-bingmaps';
 
 class JPLMap extends Component
 {
-	state = {
-		response: '',
-		post: '',
-		responseToPost: '',
-		latitude: null,
-		longitude: null,
-		error: null,
-		havePos: null,
-		//Empty array, to be filled by geolocation + db data
-		pushPins : [
-			{
-			 
-			}
-		],
-	};
+	constructor(props) {
+		super(props);
+		this.state = {
+			pushPins: [],
+			userlong: this.props.userlong,
+			userlat: this.props.userlat,
+			cars: this.props.cars
+		}
+	}
 
 
 	componentWillMount() {
-		//navigator.geolocation.getCurrentPosition(
-		//watchPosition lets us update the pin for the user as they move + fixes displaying it!
-		this.watchId = navigator.geolocation.watchPosition(
-			(position) => {
-			console.log(this);
-			this.setState({
-				latitude: position.coords.latitude,
-				longitude: position.coords.longitude,
-				error: null,
-				pushPins : [
-					{
-						"location":[position.coords.latitude, position.coords.longitude], "option":{ color: 'red' },
-					}
-				],
-			});
-			},
-			(error) => this.setState({error: error.message}),
-			{ enableHighAccuracy: false, timeout: 20000, maximumAge: 1000},
-		); 
+		this.state.pushPins.push({ "location":[this.state.userlat, this.state.userlong], "option":{ color: 'red'} });
+		for (var car of this.state.cars) {
+			this.state.pushPins.push({ "location":[car.latitude, car.longitude], "option":{ color: 'green'} });
+		}
 	}
 
-	/* componentDidMount() {
-	} */
-
-	componentWillUnmount() {
-    navigator.geolocation.clearWatch(this.watchId);
+	selectCar = (car) =>
+	{
+		this.setState({selectedCar: car});
 	}
-
-	/* onTap = (lat, long) => {
-		this.setState({
-			//pushPins:[...this.state.pushPins, {"location":[-37.8135, 144.9630], "option":{ color: 'green' }}]
-			pushPins:[...this.state.pushPins, {"location":[lat, long], "option":{ color: 'red' }}]
-		});
-	} */
 
 
 	render(props)
 	{
+		var mapCentre;
+		if (this.state.selectedCar){
+			mapCentre = [this.state.selectedCar.latitude,this.state.selectedCar.longitude];
+		} else {
+			mapCentre = [0,0];
+		}
 		return (
-			
-			<Pane Bingmapcont>
-				<p>
-	            Latitude: {this.state.latitude}
-				</p>
-				<p>
-					Longitude: {this.state.longitude}
-				</p>
-				<CarList userlat={this.state.latitude} userlat={this.state.longitude}/>
-				
-				{/* <button onClick={() => { this.onTap(this.state.latitude, this.state.longitude) }}>Frick</button> */}
-				<Pane
-					display="flex"
-				>	
-					<ReactBingmaps
-						bingmapKey = 'Ak4YC0ivePGISt6hRJCxFzEeCw67C2dnZV5lPncBzK7v4FOPaHjGrbbIoeww90mP'
-						//center = {[this.state.lat, this.state.long]} 
-						center = {[0,0]}
-						pushPins = {this.state.pushPins}
-						>
-					</ReactBingmaps>
-				</Pane>
+			<Pane display="flex">	
+				<ReactBingmaps
+					bingmapKey = 'Ak4YC0ivePGISt6hRJCxFzEeCw67C2dnZV5lPncBzK7v4FOPaHjGrbbIoeww90mP'
+					//center = {[this.state.lat, this.state.long]} 
+					center = {mapCentre}
+					pushPins = {this.state.pushPins}
+					>
+				</ReactBingmaps>
 			</Pane>
 
 		);
