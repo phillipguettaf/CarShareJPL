@@ -16,27 +16,27 @@ class JPLMap extends Component
 		error: null,
 		havePos: null,
 		//Empty array, to be filled by geolocation + db data
-		pushPins : [
-			{
-			 
-			}
-		],
-
-		infoBoxes :				
-				[
-					{
-						//"location":[this.state.cars.latitude, this.state.cars.longitude], "option":{ title: 'pls', description: '...' },
-						"location":[-37.8109, 144.9644], "option":{title: 'pls', htmlContent: '<p> test </p>' }
-					}
-				],
-		
-		/* infoBoxes :[
-				{
-				}
-        ], */
-
-		cars: this.getCars()
+		cars: this.getCars(),
+		pushPins : [],
+		infoBoxes :	this.setInfoBoxes(),
 	};
+
+	setInfoBoxes() {
+		var test = "test 2"
+
+		var infoBoxesArray = [
+			{
+				//"location":[this.state.cars.latitude, this.state.cars.longitude], "option":{ title: 'pls', description: '...' },
+				"location":[-37.8109, 144.9644], "option":{title: 'pls', htmlContent:
+				<div class="Infobox">
+				<div class="infobox-body" >test</div>
+				</div>
+				}
+			}
+		];
+
+		return infoBoxesArray;
+	}
 
 	getCars() {
 		//return knex.select().from('cars');
