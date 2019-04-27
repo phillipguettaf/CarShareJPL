@@ -23,12 +23,12 @@ class TextBox extends Component
 	{
 		console.log(res);
 		this.setState({
-			response: res.test
+			response: res[0].model
 		});
 
 	}
 
-	// Run this code when the component mounrs
+	// Run this code when the component mounts
 	componentDidMount() 
 	{
 		// Setup a basic JSON opject to POST to the node server
@@ -37,16 +37,16 @@ class TextBox extends Component
 		}
 
 		// Make our call to the API
-        	callApi('test', testData, this.testCallback);
+        	callApi('getcars', testData, this.testCallback);
 	}
 
 	render(props)
 	{
 		return (
 			<div className="TextBox">
-				<h1>{this.state.response}</h1>
 			</div>
 		);
+				//<h1>{this.state.response}</h1> // Removed to clean up
 	}
 }
 
