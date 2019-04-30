@@ -10,10 +10,29 @@ class JPLMap extends Component
 		super(props);
 		this.state = {
 			pushPins: [],
+			infoBoxes :	this.setInfoBoxes(),
 			userlong: this.props.userlong,
 			userlat: this.props.userlat,
 			cars: this.props.cars
+			
 		}
+	}
+
+	setInfoBoxes() {
+		var test = "test 2"
+
+		var infoBoxesArray = [
+			{
+				//"location":[this.state.cars.latitude, this.state.cars.longitude], "option":{ title: 'pls', description: '...' },
+				"location":[-37.8109, 144.9644], "option":{title: 'pls', htmlContent:
+				<div class="Infobox">
+				<div class="infobox-body" >test</div>
+				</div>
+				}
+			}
+		];
+
+		return infoBoxesArray;
 	}
 
 
@@ -45,6 +64,7 @@ class JPLMap extends Component
 					//center = {[this.state.lat, this.state.long]} 
 					center = {mapCentre}
 					pushPins = {this.state.pushPins}
+					infoboxes = {this.state.infoBoxes} //bad camelcase!
 					>
 				</ReactBingmaps>
 			</Pane>
