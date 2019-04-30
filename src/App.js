@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Link, Redirect} from 'react-router-dom';
 
-import JPLMap from './JPLMap'
+import MapApp from './MapApp'
 import TextBox from './TextBox'
 import Header from './Header'
 import SplashScreen from './SplashScreen'
@@ -23,10 +23,9 @@ class App extends Component {
         <Router>
           <NavBar/>
           <TextBox/>
-          <Route path='/splash' component={SplashScreen} />
-          <Route path='/map' component={JPLMap} />
+          <Route path='/map' component={MapApp} />
 
-          <Route exact path="/" component={() => <Redirect to="/splash" />}/>
+          <Route exact path="/" component={() => <Redirect to="/map" />}/>
         </Router>
       </div>
     );

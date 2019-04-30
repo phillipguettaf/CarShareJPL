@@ -1,13 +1,17 @@
 {
   "name": "jpl-car-share",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "homepage:": "https://jplcarshare.appspot.com/",
+  "description": "RMIT Car Share Capstone Project 2019",
   "dependencies": {
     "@material-ui/core": "^3.9.3",
+    "@material-ui/icons": "^3.0.2",
+    "bootstrap": "^4.3.1",
     "evergreen-ui": "^4.15.0",
-    "material-ui": "^0.20.2",
     "react": "^16.8.4",
     "react-bingmaps": "^3.6.1",
+    "react-bootstrap": "^1.0.0-beta.6",
     "react-dom": "^16.8.4",
     "react-geolocated": "^2.4.1",
     "react-geolocation": "^1.0.4",
@@ -15,19 +19,22 @@
     "react-scripts": "2.1.8"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "npm run server | npm run client",
+    "client": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "server": "node server/index.js"
   },
   "eslintConfig": {
     "extends": "react-app"
   },
-  "proxy": "http://localhost:3333",
+  "proxy": "http://localhost:8001",
   "browserslist": [
     ">0.2%",
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "author": "Blaise Saunders, Jack Viney, Phillip Guettaf, Liam Wright"
 }

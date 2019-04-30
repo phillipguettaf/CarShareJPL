@@ -1,61 +1,50 @@
 import React, { Component } from 'react';
 import './App.css';
+import {callApi} from './apiActions'
 
 
 class TextBox extends Component
 {
+	// Basic state
 	state = {
-		response: '',
-		post: '',
-		responseToPost: '',
+		response: 'pre-api',
 	};
 
 	constructor()
 	{
-		super()
+		super();
+		// THIS IS SUPER IMPORTANT
+		// Required to make sure the callback function is using the right `this` and can access stae
+		this.testCallback = this.testCallback.bind(this);
 	}
 
-	componentDidMount() {
-          this.callApi()
-            .then(res => this.setState({ response: res.express }))
-            .catch(err => console.log(err));
-        }
-        callApi = async () => {
-          const response = await fetch('/test');
-          const body = await response.json();
-          if (response.status !== 200) throw Error(body.message);
-          return body;
-        };
-        handleSubmit = async e => {
-          e.preventDefault();
-          const response = await fetch('/test', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ post: this.state.post }),
-          });
-          const body = await response.text();
-          this.setState({ responseToPost: body });
-        };
+	// Basic callback function, sets state data with JSON from the Node server
+	testCallback(res)
+	{
+		console.log(res);
+		this.setState({
+			response: res.test
+		});
+
+	}
+
+	// Run this code when the component mounrs
+	componentDidMount() 
+	{
+		// Setup a basic JSON opject to POST to the node server
+		const testData = {
+			test: "test"
+		}
+
+		// Make our call to the API
+        	callApi('test', testData, this.testCallback);
+	}
 
 	render(props)
 	{
 		return (
 			<div className="TextBox">
-				<p>{this.state.response}</p>
-				<form onSubmit={this.handleSubmit}>
-				  <p>
-				    <strong>Post to Server:</strong>
-				  </p>
-				  <input
-				    type="text"
-				    value={this.state.post}
-				    onChange={e => this.setState({ post: e.target.value })}
-				  />
-				  <button type="submit">Submit</button>
-				</form>
-				<p>{this.state.responseToPost}</p>
+				<h1>{this.state.response}</h1>
 			</div>
 		);
 	}
