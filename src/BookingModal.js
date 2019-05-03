@@ -35,15 +35,16 @@ class BookingModal extends Component {
 	}
 
 	render() {
+		
 		return (
 			<Modal
-				{...this.prop}
+				{...this.props}
 				centered
 				animation="true"
 			>
 				<Modal.Header closeButton>
 					<Modal.Title>
-					Book Car
+					Book
 					</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
@@ -79,10 +80,10 @@ class BookingModal extends Component {
 					/>
 				</Modal.Body>
 				<Modal.Footer>
-					<Button variant="secondary" onClick={this.props.onHide}>
+					<Button variant="text" onClick={this.props.onHide}>
 						Cancel
 					</Button>
-					<Button variant="primary" onClick={this.handleSubmit}>
+					<Button variant="contained" onClick={this.handleSubmit}>
 						Submit
 					</Button>
 				</Modal.Footer>

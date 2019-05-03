@@ -18,8 +18,8 @@ class MapApp extends Component
 			longitude: null,
 			error: null,
 			havePos: null,
-			//Empty array, to be filled by geolocation + db data
 			selectedCar: null,
+			//Empty array, to be filled by geolocation + db data
 			cars: null,
 			modalActive: false
 		};
@@ -110,10 +110,12 @@ class MapApp extends Component
 			};
 		});
 	}
-	// selectCar = (car) =>
-	// {
-	// 	this.setState({selectedCar: car});
-	// }
+	
+	selectCar(car){
+		this.setState({
+			selectedCar: car
+		});
+	}
 
 	showBookingModal(car) {
 		this.setState({
@@ -137,7 +139,7 @@ class MapApp extends Component
 			
 			<Pane Bingmapcont>
 				<BookingModal car={this.state.selectedCar} show={this.state.modalActive} onHide={modalClose}/>
-				<CarList userlat={this.state.latitude} userlong={this.state.longitude} cars={this.state.cars} selectCar={this.state.selectCar} showBookingModal={() => this.showBookingModal}/>
+				<CarList userlat={this.state.latitude} userlong={this.state.longitude} cars={this.state.cars} selectCar={() => this.selectCar} showBookingModal={() => this.showBookingModal}/>
 				<JPLMap userlat={this.state.latitude} userlong={this.state.longitude} cars={this.state.cars}/>
 			</Pane>
 

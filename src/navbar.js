@@ -7,7 +7,7 @@ import SvgIcon from '@material-ui/core/SvgIcon';
 
 function NavBar(props) {
 	return (
-	<AppBar position="static" color="#3d3d3d">
+	<AppBar position="static" color="primary">
 	    <Toolbar>
 		  	<Button>
 		  		<Link to='/splash'><HomeIcon/></Link>

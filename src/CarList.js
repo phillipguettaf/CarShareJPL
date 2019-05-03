@@ -13,15 +13,20 @@ class CarList extends Component {
 			cars: this.props.cars
 		};
 		this.showBookingModal = this.showBookingModal.bind(this);
+		this.selectCar = this.selectCar.bind(this);
 	}
 
 	showBookingModal(car) {
 		return this.props.showBookingModal(car);
 	}
 
+	selectCar(car) {
+		this.props.selectCar(car);
+	}
+
 	render(props) {
 		const carlist = this.state.cars.map((car, rego)=>
-				<ListItem button>
+				<ListItem button onClick={this.selectCar(car)}>
 				<ListItemIcon>
 					<EventSeat />
 				</ListItemIcon>
