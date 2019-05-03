@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import Modal from 'react-bootstrap/Modal';
-import { DatePicker } from 'react-datepicker';
+import DatePicker from 'react-datepicker';
+import { Button } from '@material-ui/core';
 
 
 class BookingModal extends Component {
 	constructor(props) {
 		super(props);
 		this.state={
-			show: false,
+			show: this.props.show,
 			startDate: new Date(),
-			endDate: new Date()
+			endDate: new Date(),
+			car: this.props.car
 		};
 		this.handleChangeStart = this.handleChangeStart.bind(this);
 		this.handleChangeEnd = this.handleChangeEnd.bind(this);
@@ -22,29 +24,31 @@ class BookingModal extends Component {
 
 	handleChangeStart(date) {
 		this.setState({
-			startDate: date;
+			startDate: date
 		});
 	}
 
 	handleChangeEnd(date) {
 		this.setState({
-			endDate: date;
+			endDate: date
 		});
 	}
 
 	render() {
 		return (
 			<Modal
-				{...this.props}
+				{...this.prop}
 				centered
+				animation="true"
 			>
 				<Modal.Header closeButton>
 					<Modal.Title>
-					{this.props.car.make}{this.props.car.model}
+					Book Car
 					</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					<p>Start</p>
+					<p>Book</p>
+					<span>Start: </span>
 					<DatePicker
 						todayButton={"Today"}
 					    selected={this.state.startDate}
@@ -58,7 +62,8 @@ class BookingModal extends Component {
 					    dateFormat="dd/mm/yyyy h:mm aa"
 					    timeCaption="start"
 					/>
-					<p>End</p>
+					<br/>
+					<span>End: </span>
 					<DatePicker
 					    todayButton={"Today"}
 					    selected={this.state.endDate}
@@ -74,7 +79,7 @@ class BookingModal extends Component {
 					/>
 				</Modal.Body>
 				<Modal.Footer>
-					<Button variant="secondary" onClick={() => this.setState({show:false})}>
+					<Button variant="secondary" onClick={this.props.onHide}>
 						Cancel
 					</Button>
 					<Button variant="primary" onClick={this.handleSubmit}>

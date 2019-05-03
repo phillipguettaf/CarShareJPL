@@ -12,6 +12,11 @@ class CarList extends Component {
 		this.state = {
 			cars: this.props.cars
 		};
+		this.showBookingModal = this.showBookingModal.bind(this);
+	}
+
+	showBookingModal(car) {
+		return this.props.showBookingModal(car);
 	}
 
 	render(props) {
@@ -24,7 +29,7 @@ class CarList extends Component {
 					primary={car.make} 
 					secondary={car.distance.toFixed(2) + "km"}/>
 				<ListItemSecondaryAction>
-					<Button onClick={}>Book</Button>	
+					<Button onClick={this.showBookingModal(car)}>Book</Button>	
 				</ListItemSecondaryAction>
 				</ListItem> 
 				);

@@ -2,23 +2,30 @@ import React, { Component } from 'react';
 import './App.css';
 import CarList from './CarList';
 import JPLMap from './JPLMap';
+import BookingModal from './BookingModal';
 import { Pane } from 'evergreen-ui';
+
 
 class MapApp extends Component
 {
-	state = {
-		response: '',
-		post: '',
-		responseToPost: '',
-		latitude: null,
-		longitude: null,
-		error: null,
-		havePos: null,
-		//Empty array, to be filled by geolocation + db data
-		selectedCar: null,
-		cars: null
-	};
+	constructor(props) {
+		super(props);
+		this.state = {
+			response: '',
+			post: '',
+			responseToPost: '',
+			latitude: null,
+			longitude: null,
+			error: null,
+			havePos: null,
+			//Empty array, to be filled by geolocation + db data
+			selectedCar: null,
+			cars: null,
+			modalActive: false
+		};
 
+		this.showBookingModal = this.showBookingModal.bind(this);
+	}
 
 	componentWillMount() {
 		//navigator.geolocation.getCurrentPosition(
@@ -85,7 +92,7 @@ class MapApp extends Component
 	    dist = dist * SEMI_CIRCLE_DEGREES/Math.PI;
 	    dist = dist * (SEMI_CIRCLE_DEGREES / 2) * 1.1515;
 	    dist = dist * 1.609344;
-	    return dist
+	    return dist;
 	}
 
 	sortCars(userlat, userlong, cars) {
@@ -108,20 +115,29 @@ class MapApp extends Component
 	// 	this.setState({selectedCar: car});
 	// }
 
+	showBookingModal(car) {
+		this.setState({
+			selectedCar: car,
+			modalActive: true
+		});
+	}
+
 
 	render(props)
 	{
+		let modalClose = () => this.setState({ modalActive: false });
 		var mapCentre;
 		this.sortCars(this.state.latitude, this.state.longitude, this.state.cars);
-		// if (this.state.selectedCar){
-		// 	mapCentre = [this.state.selectedCar.latitude,this.state.selectedCar.longitude];
-		// } else {
-		// 	mapCentre = [0,0];
-		// }
+		if (this.state.selectedCar){
+			mapCentre = [this.state.selectedCar.latitude,this.state.selectedCar.longitude];
+		} else {
+			mapCentre = [0,0];
+		}
 		return (
 			
 			<Pane Bingmapcont>
-				<CarList userlat={this.state.latitude} userlong={this.state.longitude} cars={this.state.cars} selectCar = {this.selectCar}/>
+				<BookingModal car={this.state.selectedCar} show={this.state.modalActive} onHide={modalClose}/>
+				<CarList userlat={this.state.latitude} userlong={this.state.longitude} cars={this.state.cars} selectCar={this.state.selectCar} showBookingModal={() => this.showBookingModal}/>
 				<JPLMap userlat={this.state.latitude} userlong={this.state.longitude} cars={this.state.cars}/>
 			</Pane>
 

@@ -4,7 +4,7 @@ import { Button } from '@material-ui/core';
 class CarBox extends Component {
 
 	bookCar() {
-		
+		return;
 	}
 
 	render(props) {
