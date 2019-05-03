@@ -28,4 +28,4 @@ INSERT INTO cars(rego, make, model, year, latitude, longitude) VALUES ('NOP901',
 
 INSERT INTO cars(rego, make, model, year, latitude, longitude) VALUES ('QRS234', 'Tesla', 'Model-S', 2019, -37.810262, 144.957326);
 
-INSERT INTO cars(rego, make, model, year, latitude, longitude) VALUES ('TUV567', 'Honda', 'Civic', 2015, -37.799691, 144.962507)
+INSERT INTO cars(rego, make, model, year, latitude, longitude) VALUES ('TUV567', 'Honda', 'Civic', 2015, -37.799691, 144.962507);
