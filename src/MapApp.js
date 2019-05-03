@@ -3,6 +3,8 @@ import './App.css';
 import CarList from './CarList';
 import JPLMap from './JPLMap';
 import { Pane } from 'evergreen-ui';
+import { callApi } from './apiActions'
+
 
 class MapApp extends Component
 {
@@ -16,11 +18,31 @@ class MapApp extends Component
 		havePos: null,
 		//Empty array, to be filled by geolocation + db data
 		selectedCar: null,
-		cars: null
+		cars: null,
+		carsLoaded: false
 	};
 
+	constructor()
+	{
+		super();
+		// THIS IS SUPER IMPORTANT
+		this.getCarsCallback = this.getCarsCallback.bind(this);
+	}
+	
+	getCarsCallback(res)
+	{
 
-	componentWillMount() {
+		console.log("Get Cars Callback got:");
+		console.log(res);
+		this.setState({
+			cars: res,
+			carsLoaded: true
+		});
+
+	}
+
+	componentDidMount() 
+	{
 		//navigator.geolocation.getCurrentPosition(
 		//watchPosition lets us update the pin for the user as they move + fixes displaying it!
 		this.watchId = navigator.geolocation.watchPosition(
@@ -40,14 +62,21 @@ class MapApp extends Component
 			(error) => this.setState({error: error.message}),
 			{ enableHighAccuracy: false, timeout: 20000, maximumAge: 1000},
 		);
-		this.setState({cars: this.getCars()}); 
+
+	
+
+		// Setup a basic JSON opject to POST to the node server (mandatory)
+		const postData = {
+			place: "holder"
+		}
+
+		// Make our call to the API
+        	callApi('getcars', postData, this.getCarsCallback);
 	}
 
-	/* componentDidMount() {
-	} */
-
-	componentWillUnmount() {
-    navigator.geolocation.clearWatch(this.watchId);
+	componentWillUnmount() 
+	{
+		navigator.geolocation.clearWatch(this.watchId);
 	}
 
 	/* onTap = (lat, long) => {
@@ -57,50 +86,44 @@ class MapApp extends Component
 		});
 	} */
 
-	getCars() {
-		//return knex.select().from('cars');
-		var cars = [
-			{ rego: '123456', make: 'Ford Falcon', latitude: '-37.807895', longitude: '144.965736', distance: null},
-			{ rego: '132456', make: 'Toyota Camry', latitude: '-37.805153', longitude: '144.967273', distance: null},
-			{ rego: '154326', make: 'Volkswagen Beetle', latitude: '-37.812307', longitude: '144.973477', distance: null},
-			{ rego: '543321', make: 'Mazda 3', latitude: '-37.817710', longitude: '144.954513', distance: null}
-		];
 
-		return cars;
-	}
-
+	// Dude I love C
 	/**	Gets the distance between two points (lat1, lon1) & (lat2, long2)
 	*	and returns it in metres
 	*	Function uses the Haversine distance
 	*	Implementation adapted from GeoSourceData.com's function in Javascript
 	**/
-	static getDistance(lat1, lon1, lat2, lon2) {
+	static getDistance(lat1, lon1, lat2, lon2)
+	{
+	
 		const SEMI_CIRCLE_DEGREES = 180;
-	    var radlat1 = Math.PI * lat1/SEMI_CIRCLE_DEGREES;
-	    var radlat2 = Math.PI * lat2/SEMI_CIRCLE_DEGREES;
-	    var theta = lon1-lon2;
-	    var radtheta = Math.PI * theta/SEMI_CIRCLE_DEGREES;
-	    var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
-	    dist = Math.acos(dist);
-	    dist = dist * SEMI_CIRCLE_DEGREES/Math.PI;
-	    dist = dist * (SEMI_CIRCLE_DEGREES / 2) * 1.1515;
-	    dist = dist * 1.609344;
-	    return dist
+		var radlat1 = Math.PI * lat1/SEMI_CIRCLE_DEGREES;
+		var radlat2 = Math.PI * lat2/SEMI_CIRCLE_DEGREES;
+		var theta = lon1-lon2;
+		var radtheta = Math.PI * theta/SEMI_CIRCLE_DEGREES;
+		var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+		dist = Math.acos(dist);
+		dist = dist * SEMI_CIRCLE_DEGREES/Math.PI;
+		dist = dist * (SEMI_CIRCLE_DEGREES / 2) * 1.1515;
+		dist = dist * 1.609344;
+		return dist
 	}
 
-	sortCars(userlat, userlong, cars) {
+	sortCars(userlat, userlong, cars) 
+	{
 
 		for (var car of cars)
 		{
 			car.distance = MapApp.getDistance(userlat, userlong, car.latitude, car.longitude);
 		}
 
-		this.state.cars.sort(function(a,b) {
-			if (a.distance < b.distance) {
+		this.state.cars.sort(function(a,b) 
+		{
+			if (a.distance < b.distance)
 				return -1;
-			} else {
+			else
 				return 1;
-			};
+			
 		});
 	}
 	// selectCar = (car) =>
@@ -111,22 +134,32 @@ class MapApp extends Component
 
 	render(props)
 	{
-		var mapCentre;
-		this.sortCars(this.state.latitude, this.state.longitude, this.state.cars);
+		if (this.state.carsLoaded === true)
+		{
+
+			var mapCentre;
+			this.sortCars(this.state.latitude, this.state.longitude, this.state.cars);
+			return (
+				
+				<Pane Bingmapcont>
+					<CarList userlat={this.state.latitude} userlong={this.state.longitude} cars={this.state.cars} selectCar = {this.selectCar}/>
+					<JPLMap userlat={this.state.latitude} userlong={this.state.longitude} cars={this.state.cars}/>
+				</Pane>
+
+			);
+		}
+		else 
+			return (<h1> Loading... </h1>)
+
+	}
+}
+
+export default MapApp;
+
+
+
 		// if (this.state.selectedCar){
 		// 	mapCentre = [this.state.selectedCar.latitude,this.state.selectedCar.longitude];
 		// } else {
 		// 	mapCentre = [0,0];
 		// }
-		return (
-			
-			<Pane Bingmapcont>
-				<CarList userlat={this.state.latitude} userlong={this.state.longitude} cars={this.state.cars} selectCar = {this.selectCar}/>
-				<JPLMap userlat={this.state.latitude} userlong={this.state.longitude} cars={this.state.cars}/>
-			</Pane>
-
-		);
-	}
-}
-
-export default MapApp;
