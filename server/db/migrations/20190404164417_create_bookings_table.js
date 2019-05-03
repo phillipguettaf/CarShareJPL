@@ -2,7 +2,8 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('bookings', function(t) {
   	t.increments('id').primary()
-  	t.timestamps()
+  	t.datetime('start')
+    t.datetime('end')
   	t.string('email')
   	t.string('rego')
   })
