@@ -10,7 +10,7 @@ class JPLMap extends Component
 		super(props);
 		this.state = {
 			pushPins: [],
-			infoBoxes :	this.setInfoBoxes(),
+			infoBoxes : [],
 			userlong: this.props.userlong,
 			userlat: this.props.userlat,
 			cars: this.props.cars
@@ -38,12 +38,20 @@ class JPLMap extends Component
 		return infoBoxesArray;
 	}
 
-
-	componentWillMount() {
-		this.state.pushPins.push({ "location":[this.state.userlat, this.state.userlong], "option":{ color: 'red'} });
-		for (var car of this.state.cars) {
-			this.state.pushPins.push({ "location":[car.latitude, car.longitude], "option":{ color: 'green'} });
-		}
+	componentDidMount() {
+		
+		this.watchId = navigator.geolocation.watchPosition(
+			(position) => {
+				//empty out the array to prevent pushpins from layering over each other.
+				//this.setState({pushPins: []});
+				for (var car of this.state.cars) {
+					this.state.infoBoxes.push({ "location":[car.latitude, car.longitude]});
+				} 
+				this.state.pushPins.push({ "location":[position.coords.latitude, position.coords.longitude], "option":{ color: 'red' }});
+			},
+			(error) => this.setState({error: error.message}),
+			{ enableHighAccuracy: false, timeout: 20000, maximumAge: 1000},
+		);
 	}
 
 	selectCar = (car) =>
@@ -62,7 +70,6 @@ class JPLMap extends Component
 		}
 		return (
 			<Pane display="flex">	
-			<div className="infobox-body">test</div>
 				<ReactBingmaps
 					bingmapKey = 'Ak4YC0ivePGISt6hRJCxFzEeCw67C2dnZV5lPncBzK7v4FOPaHjGrbbIoeww90mP'
 					//center = {[this.state.lat, this.state.long]} 
