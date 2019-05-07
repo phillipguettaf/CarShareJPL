@@ -1,6 +1,4 @@
-/* 	Author: Liam Wright
-	This is a render method that will serve as the foundation for the login/register functionality
-*/
+//This is a render method that will serve as the foundation for the login functionality
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
