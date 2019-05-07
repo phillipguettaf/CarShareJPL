@@ -17,13 +17,13 @@ class JPLMap extends Component
 		}
 	}
 
-	setInfoBoxes() {
-		var test = "test 2"
+	infoBoxBuilder(car) {
+		var test = car.make
 
-		var infoBoxesArray = [
+		var info = 
 			{
 				//"location":[this.state.cars.latitude, this.state.cars.longitude], "option":{ title: 'pls', description: '...' },
-				"location":[-37.8109, 144.9644], "option":{ title: 'pls', htmlContent:
+				"location":[car.latitude, car.longitude], "option":{ title: 'pls', htmlContent:
 				<div>
 				<div class="Infobox">
 				<div class="infobox-body">{test}</div>
@@ -32,20 +32,17 @@ class JPLMap extends Component
 				</div>
 				
 				}
-			}
-		];
+			};
 
-		return infoBoxesArray;
+		return info;
 	}
 
 	componentDidMount() {
 		
 		this.watchId = navigator.geolocation.watchPosition(
 			(position) => {
-				//empty out the array to prevent pushpins from layering over each other.
-				//this.setState({pushPins: []});
 				for (var car of this.state.cars) {
-					this.state.infoBoxes.push({ "location":[car.latitude, car.longitude]});
+					this.state.infoBoxes.push(this.infoBoxBuilder(car));
 				} 
 				this.state.pushPins.push({ "location":[position.coords.latitude, position.coords.longitude], "option":{ color: 'red' }});
 			},
