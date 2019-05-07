@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './JPLMap.css';
 import { Pane } from 'evergreen-ui';
 
 import { ReactBingmaps } from 'react-bingmaps';
@@ -14,7 +14,6 @@ class JPLMap extends Component
 			userlong: this.props.userlong,
 			userlat: this.props.userlat,
 			cars: this.props.cars
-			
 		}
 	}
 
@@ -24,10 +23,14 @@ class JPLMap extends Component
 		var infoBoxesArray = [
 			{
 				//"location":[this.state.cars.latitude, this.state.cars.longitude], "option":{ title: 'pls', description: '...' },
-				"location":[-37.8109, 144.9644], "option":{title: 'pls', htmlContent:
+				"location":[-37.8109, 144.9644], "option":{ title: 'pls', htmlContent:
+				<div>
 				<div class="Infobox">
-				<div class="infobox-body" >test</div>
+				<div class="infobox-body">{test}</div>
 				</div>
+				<div class="infobox-stalk"></div>
+				</div>
+				
 				}
 			}
 		];
@@ -59,6 +62,7 @@ class JPLMap extends Component
 		}
 		return (
 			<Pane display="flex">	
+			<div className="infobox-body">test</div>
 				<ReactBingmaps
 					bingmapKey = 'Ak4YC0ivePGISt6hRJCxFzEeCw67C2dnZV5lPncBzK7v4FOPaHjGrbbIoeww90mP'
 					//center = {[this.state.lat, this.state.long]} 
