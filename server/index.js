@@ -1,5 +1,4 @@
 const express = require("express");
-const cors = require("cors");
 const app = express();
 const bodyParser = require("body-parser");
 const fs = require("fs");
@@ -28,7 +27,6 @@ const routes = {
 };
 
 // Use CORS with express
-app.use(cors());
 app.use(bodyParser.json()); // to support JSON-encoded bodies
 app.use(
 	bodyParser.urlencoded({
