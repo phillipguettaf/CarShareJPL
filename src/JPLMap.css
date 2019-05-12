@@ -1,5 +1,8 @@
 .infobox-body {
-    color: red;
+    margin: 2%;
+}
+.infobox-body > p {
+    color: black !important;
 };
 
 .infoboxStalk {

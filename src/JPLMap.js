@@ -26,7 +26,11 @@ class JPLMap extends Component
 				"infoboxOption":{htmlContent:
 					<div>
 					<div class="Infobox">
-					<div class="infobox-body">{car.make}</div>
+						<div class="infobox-body">
+							<p>Car: {car.make}</p>
+							<p>Distance: {car.distance.toFixed(2) + "km"}</p>
+							
+						</div>
 					</div>
 					<div class="infobox-stalk"></div>
 					</div>
