@@ -10,7 +10,7 @@ class JPLMap extends Component
 		super(props);
 		this.state = {
 			pushPins: [],
-			infoBoxes : [],
+			infoboxesWithPushPins : [],
 			userlong: this.props.userlong,
 			userlat: this.props.userlat,
 			cars: this.props.cars
@@ -18,20 +18,22 @@ class JPLMap extends Component
 	}
 
 	infoBoxBuilder(car) {
-		var test = car.make
-
 		var info = 
 			{
 				//"location":[this.state.cars.latitude, this.state.cars.longitude], "option":{ title: 'pls', description: '...' },
-				"location":[car.latitude, car.longitude], "option":{ title: 'pls', htmlContent:
-				<div>
-				<div class="Infobox">
-				<div class="infobox-body">{test}</div>
-				</div>
-				<div class="infobox-stalk"></div>
-				</div>
-				
-				}
+				"location":[car.latitude, car.longitude],
+				"addHandler":"mouseover",
+				"infoboxOption":{htmlContent:
+					<div>
+					<div class="Infobox">
+					<div class="infobox-body">{car.make}</div>
+					</div>
+					<div class="infobox-stalk"></div>
+					</div>
+				},
+				"pushPinOption":{ title: car.make},
+				"infoboxAddHandler": {"type" : "click", callback: this.callBackMethod },
+				"pushPinAddHandler": {"type" : "click", callback: this.callBackMethod }
 			};
 
 		return info;
@@ -42,7 +44,7 @@ class JPLMap extends Component
 		this.watchId = navigator.geolocation.watchPosition(
 			(position) => {
 				for (var car of this.state.cars) {
-					this.state.infoBoxes.push(this.infoBoxBuilder(car));
+					this.state.infoboxesWithPushPins.push(this.infoBoxBuilder(car));
 				} 
 				this.state.pushPins.push({ "location":[position.coords.latitude, position.coords.longitude], "option":{ color: 'red' }});
 			},
@@ -72,7 +74,7 @@ class JPLMap extends Component
 					//center = {[this.state.lat, this.state.long]} 
 					center = {mapCentre}
 					pushPins = {this.state.pushPins}
-					infoboxes = {this.state.infoBoxes} //bad camelcase!
+					infoboxesWithPushPins = {this.state.infoboxesWithPushPins}
 					>
 				</ReactBingmaps>
 			</Pane>
