@@ -12,19 +12,29 @@ class CarList extends Component {
 		this.state = {
 			cars: this.props.cars
 		};
+		this.showBookingModal = this.showBookingModal.bind(this);
+		this.selectCar = this.selectCar.bind(this);
+	}
+
+	showBookingModal(car) {
+		return this.props.showBookingModal(car);
+	}
+
+	selectCar(car) {
+		return this.props.selectCar(car);
 	}
 
 	render(props) {
-		const carlist = this.state.cars.map((car, rego)=>
-				<ListItem button>
+		const carlist = this.state.cars.map((car)=>
+				<ListItem button onClick={() => this.selectCar(car)}>
 				<ListItemIcon>
 					<EventSeat />
 				</ListItemIcon>
 				<ListItemText 
-					primary={car.make} 
+					primary={car.make + " " + car.model}
 					secondary={car.distance.toFixed(2) + "km"}/>
 				<ListItemSecondaryAction>
-					<Button>Book</Button>	
+					<Button onClick={() => this.showBookingModal(car)}>Book</Button>	
 				</ListItemSecondaryAction>
 				</ListItem> 
 				);

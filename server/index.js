@@ -77,7 +77,18 @@ app.post("/getcars", function(req, res) {
 		res.json(results);
 
 	});
+});
 
+app.post("/submitbooking", function(req, res) {
+	console.log('Booking submitted: ');
+	//	Need the user logged in to save booking data
+	// var insert = "INSERT INTO bookings(id, start, end, email, rego) VALUES ('" 
+	// + new Date() + "','"
+	// + " ','"
+	// + res.body.user.email + "','"
+	// + res.body.car.rego 
+	// + "'') COMMIT;"
+	res.json({message: "Booking made."});
 });
 
 

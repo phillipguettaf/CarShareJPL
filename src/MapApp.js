@@ -3,14 +3,14 @@ import './App.css';
 import CarList from './CarList';
 import JPLMap from './JPLMap';
 import BookingModal from './BookingModal';
-import { Pane } from 'evergreen-ui';
+import { Pane, toaster } from 'evergreen-ui';
 import { callApi } from './apiActions'
 
 class MapApp extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-	  	response: '',
+		response: '',
 			post: '',
 			responseToPost: '',
 			latitude: null,
@@ -22,14 +22,28 @@ class MapApp extends Component {
 			cars: null,
 			carsLoaded: false
 		};
+		this.submitBooking = this.submitBooking.bind(this);
+		this.submitBookingCallback = this.submitBookingCallback.bind(this);
 		this.getCarsCallback = this.getCarsCallback.bind(this);
 		this.selectCar = this.selectCar.bind(this);
 		this.showBookingModal = this.showBookingModal.bind(this);
 	}
 
-	getCarsCallback(res)
-	{
-    console.log("Get Cars Callback got:");
+	submitBooking(car) {
+		//need user logged in to save booking data
+		callApi('submitbooking', car, this.submitBookingCallback);
+		this.setState({
+			modalActive: false
+		});
+	}
+
+	submitBookingCallback(res) {
+		console.log(res);
+		toaster.success("Car booked");
+	}
+
+	getCarsCallback(res) {
+		console.log("Get Cars Callback got:");
 		console.log(res);
 		this.setState({
 			cars: res,
@@ -76,23 +90,13 @@ class MapApp extends Component {
 		navigator.geolocation.clearWatch(this.watchId);
 	}
 
-	/* onTap = (lat, long) => {
-		this.setState({
-			//pushPins:[...this.state.pushPins, {"location":[-37.8135, 144.9630], "option":{ color: 'green' }}]
-			pushPins:[...this.state.pushPins, {"location":[lat, long], "option":{ color: 'red' }}]
-		});
-	} */
-
-
 	// Dude I love C
 	/**	Gets the distance between two points (lat1, lon1) & (lat2, long2)
 	*	and returns it in metres
 	*	Function uses the Haversine distance
 	*	Implementation adapted from GeoSourceData.com's function in Javascript
 	**/
-	static getDistance(lat1, lon1, lat2, lon2)
-	{
-	
+	static getDistance(lat1, lon1, lat2, lon2) {
 		const SEMI_CIRCLE_DEGREES = 180;
 		var radlat1 = Math.PI * lat1/SEMI_CIRCLE_DEGREES;
 	    var radlat2 = Math.PI * lat2/SEMI_CIRCLE_DEGREES;
@@ -136,6 +140,7 @@ class MapApp extends Component {
 			});
 		}
 	}
+
 	render(props) {
 		if (this.state.carsLoaded) {
 			let modalClose = () => this.setState({ modalActive: false });
@@ -148,16 +153,16 @@ class MapApp extends Component {
 			}
 			return (	
 				<Pane Bingmapcont>
-					<BookingModal show={this.state.modalActive} car={this.state.selectedCar} onHide={modalClose}/>
+					<BookingModal show={this.state.modalActive} car={this.state.selectedCar} onHide={modalClose} handleSubmit={this.submitBooking}/>
 					<CarList userlat={this.state.latitude} userlong={this.state.longitude} cars={this.state.cars} selectCar={this.selectCar} showBookingModal={this.showBookingModal}/>
-					<JPLMap userlat={this.state.latitude} userlong={this.state.longitude} cars={this.state.cars} selectCar={this.selectCar} showBookingModal={this.showBookingModal}/>
-				</Pane>
+					<JPLMap userlat={this.state.latitude} userlong={this.state.longitude} cars={this.state.cars}/>
 
+				</Pane>
 			);
 		} else {
 			return (<h1>Loading...</h1>);
 		}	
 	}
 }
-
 export default MapApp;
+
