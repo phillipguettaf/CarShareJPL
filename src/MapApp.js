@@ -11,7 +11,7 @@ import { callApi } from './apiActions'
 class MapApp extends Component {
 	constructor(props) {
 		super(props);
-		this.setState({
+		this.state = {
 		response: '',
 			post: '',
 			responseToPost: '',
@@ -20,10 +20,10 @@ class MapApp extends Component {
 			error: null,
 			havePos: null,
 			selectedCar: null,
-			modalActive: false
+			modalActive: false,
 			cars: null,
-			carsLoaded: true
-		});
+			carsLoaded: false
+		};
 		this.getCarsCallback = this.getCarsCallback.bind(this);
 		this.selectCar = this.selectCar.bind(this);
 		this.showBookingModal = this.showBookingModal.bind(this);
@@ -105,12 +105,11 @@ class MapApp extends Component {
 	    return dist;
 	}
 
-	sortCars(userlat, userlong, cars) 
-	{
-
-		for (var car of cars) {
+	sortCars(userlat, userlong, cars) {
+		this.state.cars.forEach(function getDistance(car, index) 
+		{
 			car.distance = MapApp.getDistance(userlat, userlong, car.latitude, car.longitude);
-		}
+		});
 
 		this.state.cars.sort(function(a,b) 
 		{
@@ -156,7 +155,7 @@ class MapApp extends Component {
 				</Pane>
 			);
 		} else {
-			return (<h1>Loading...</h1>;
+			return (<h1>Loading...</h1>);
 		}	
 	}
 }
