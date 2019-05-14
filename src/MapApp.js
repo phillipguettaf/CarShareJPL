@@ -19,7 +19,7 @@ class MapApp extends Component
 			error: null,
 			havePos: null,
 			//	Dummy data to fill so Booking Modal will load
-			selectedCar: { make: "Fake Car"},
+			selectedCar: null,
 			//Empty array, to be filled by geolocation + db data
 			cars: null,
 			modalActive: false
@@ -98,8 +98,7 @@ class MapApp extends Component
 
 	sortCars(userlat, userlong, cars) {
 
-		for (var car of cars)
-		{
+		for (var car of cars) {
 			car.distance = MapApp.getDistance(userlat, userlong, car.latitude, car.longitude);
 		}
 
@@ -112,17 +111,19 @@ class MapApp extends Component
 		});
 	}
 	
-	selectCar(newCar){
-		this.setState({
-			selectedCar: newCar
-		});
+	selectCar(car){
+			this.setState({
+				selectedCar: car
+			});
 	}
 
-	showBookingModal(newCar) {
-		this.selectCar(newCar);
-		this.setState({
-			modalActive: true
-		});
+	showBookingModal(car) {
+		this.selectCar(car);
+		if (!(this.state.modalActive)) {
+			this.setState({
+				modalActive: true
+			});
+		}
 	}
 
 
@@ -140,7 +141,7 @@ class MapApp extends Component
 			
 			<Pane Bingmapcont>
 				<BookingModal show={this.state.modalActive} car={this.state.selectedCar} onHide={modalClose}/>
-				<CarList userlat={this.state.latitude} userlong={this.state.longitude} cars={this.state.cars} selectCar={(car) => this.selectCar} showBookingModal={(car) => this.showBookingModal}/>
+				<CarList userlat={this.state.latitude} userlong={this.state.longitude} cars={this.state.cars} selectCar={this.selectCar} showBookingModal={this.showBookingModal}/>
 				<JPLMap userlat={this.state.latitude} userlong={this.state.longitude} cars={this.state.cars}/>
 			</Pane>
 

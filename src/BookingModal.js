@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { Dialog } from 'evergreen-ui';
-import { Button } from '@material-ui/core';
-
 
 class BookingModal extends Component {
 	constructor(props) {
@@ -18,7 +16,7 @@ class BookingModal extends Component {
 		return (
 			<Dialog
 				isShown={this.props.show}
-				title={"Book " + this.props.car.make}
+				title={"Book " + (this.props.car == null ? "Dummy Car" : this.props.car.make + " " + this.props.car.rego)}
 				onCloseComplete={this.props.onHide}
 			>
 				<p>Your car will be reserved for 10 minutes from the booking time.</p>
