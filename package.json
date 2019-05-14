@@ -28,7 +28,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "node server/index.js"
+    "server": "node server/index.js >> log.txt"
   },
   "eslintConfig": {
     "extends": "react-app"
