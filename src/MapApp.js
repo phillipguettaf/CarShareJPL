@@ -155,7 +155,7 @@ class MapApp extends Component {
 				<Pane Bingmapcont>
 					<BookingModal show={this.state.modalActive} car={this.state.selectedCar} onHide={modalClose} handleSubmit={this.submitBooking}/>
 					<CarList userlat={this.state.latitude} userlong={this.state.longitude} cars={this.state.cars} selectCar={this.selectCar} showBookingModal={this.showBookingModal}/>
-					<JPLMap userlat={this.state.latitude} userlong={this.state.longitude} cars={this.state.cars}/>
+					<JPLMap userlat={this.state.latitude} userlong={this.state.longitude} cars={this.state.cars} showBookingModal={this.showBookingModal}/>
 
 				</Pane>
 			);
