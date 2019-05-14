@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './JPLMap.css';
 import { Pane } from 'evergreen-ui';
-
+import { Button } from '@material-ui/core';
 import { ReactBingmaps } from 'react-bingmaps';
 
 class JPLMap extends Component
@@ -38,22 +38,22 @@ class JPLMap extends Component
 			{
 				//"location":[this.state.cars.latitude, this.state.cars.longitude], "option":{ title: 'pls', description: '...' },
 				"location":[car.latitude, car.longitude],
-				"addHandler":"mouseover",
-				"infoboxOption":{htmlContent:
-					<div>
-					<div class="Infobox">
-						<div class="infobox-body">
-							<p>Car: {car.make}</p>
-							<p>Distance: {car.distance.toFixed(2) + "km"}</p>
-							
-						</div>
-					</div>
-					<div class="infobox-stalk"></div>
-					</div>
+				"addHandler":"click", //doesn't allow dismissing the pushpin by itself.
+				//"addHandler":"mouseover",
+				"infoboxOption":{
+					title: car.make,
+					description: "Distance " + car.distance.toFixed(2) + "km",
+					actions: [{
+						label: 'Book', eventHandler: () => {
+							//this.showBookingModal(car);
+						}
+					}]
+
+
 				},
 				"pushPinOption":{ title: car.make},
-				"infoboxAddHandler": {"type" : "click", callback: this.callBackMethod },
-				"pushPinAddHandler": {"type" : "click", callback: this.callBackMethod }
+				/* "infoboxAddHandler": {"type" : "click", callback: this.callBackMethod },
+				"pushPinAddHandler": {"type" : "click", callback: this.callBackMethod } */
 			};
 
 		return info;

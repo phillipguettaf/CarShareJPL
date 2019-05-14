@@ -1,19 +1,3 @@
-.infobox-body {
-    margin: 2%;
-}
-.infobox-body > p {
-    color: black !important;
-};
-
-.infoboxStalk {
-    top: 74.8px;
-    left: 54.5px;
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAQCAQAAACMnYaxAAAA7ElEQVQY02OYf/Xvf0zw9/+8awwMDPmax39jSh79bePBwAWU7lv8F0Nf7WYGDQZuoGSO2VU0yfP/7SMZpBhYgJIMjMvOokrOvsKgzcDLwAiSZCjM+4Qk9e5/eDODAgMbAwTkiR/6hZDc80PSmkGYgYkBBmZth0n9+9+yG+gYLqihYIPjXkMln/z3K2SQhTgGCvIFdn6HSG75JGzCIIRkKAhM3wwxtH4TgzoDJ5KhIFAQCzL4wX/vHAYZFEMhBu/58f//pvf8xgyCaIaCwIzN//5Xr2VQwzAUYvCJ/0FRsGBDA6W85bf4hODBBgQA+GzIcvxs8/oAAAAASUVORK5CYII=);
-};
-
-.react-bingmaps
-{
-	width: 100% !important;
-	min-height: 800px !important; /* DEBUG */
-	height: 100% !important;
-}
+/* .infobox-actions-list {
+    
+} */
