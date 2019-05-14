@@ -1,12 +1,5 @@
 import React, { Component } from 'react';
 import { Dialog } from 'evergreen-ui';
-import { withStyles } from '@material-ui/core/styles';
-
-const styles = {
-	root: {
-		color: "black"
-	},
-};
 
 class BookingModal extends Component {
 	constructor(props) {
@@ -20,11 +13,12 @@ class BookingModal extends Component {
 
 	render() {
 		return (
-			<Dialog className={this.props.classes.root}
+			<Dialog
 				isShown={this.props.show}
 				title={"Book " + (this.props.car == null ? "Dummy Car" : 
 					this.props.car.make + " " + this.props.car.model + " " + this.props.car.rego)}
 				onCloseComplete={this.props.onHide}
+
 				onConfirm={() => this.handleSubmit(this.props.car)}
 			>
 				<p>Your car will be reserved for 10 minutes from the booking time.</p>
@@ -35,5 +29,4 @@ class BookingModal extends Component {
 	}
 
 }
-
-export default withStyles(styles)(BookingModal);
+export default BookingModal;

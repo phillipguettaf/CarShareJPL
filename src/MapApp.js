@@ -6,8 +6,6 @@ import BookingModal from './BookingModal';
 import { Pane, toaster } from 'evergreen-ui';
 import { callApi } from './apiActions'
 
-
-
 class MapApp extends Component {
 	constructor(props) {
 		super(props);
@@ -82,12 +80,12 @@ class MapApp extends Component {
 		const postData = {
 			place: "holder"
 		}
-
+    
 		// Make our call to the API
         	callApi('getcars', postData, this.getCarsCallback);
 	}
 
-	componentWillUnmount() 
+  componentWillUnmount() 
 	{
 		navigator.geolocation.clearWatch(this.watchId);
 	}
@@ -143,7 +141,6 @@ class MapApp extends Component {
 		}
 	}
 
-
 	render(props) {
 		if (this.state.carsLoaded) {
 			let modalClose = () => this.setState({ modalActive: false });
@@ -159,6 +156,7 @@ class MapApp extends Component {
 					<BookingModal show={this.state.modalActive} car={this.state.selectedCar} onHide={modalClose} handleSubmit={this.submitBooking}/>
 					<CarList userlat={this.state.latitude} userlong={this.state.longitude} cars={this.state.cars} selectCar={this.selectCar} showBookingModal={this.showBookingModal}/>
 					<JPLMap userlat={this.state.latitude} userlong={this.state.longitude} cars={this.state.cars}/>
+
 				</Pane>
 			);
 		} else {
@@ -166,5 +164,5 @@ class MapApp extends Component {
 		}	
 	}
 }
-
 export default MapApp;
+
