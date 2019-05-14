@@ -6,13 +6,11 @@ import BookingModal from './BookingModal';
 import { Pane } from 'evergreen-ui';
 import { callApi } from './apiActions'
 
-
-
 class MapApp extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-		response: '',
+	  	response: '',
 			post: '',
 			responseToPost: '',
 			latitude: null,
@@ -29,8 +27,9 @@ class MapApp extends Component {
 		this.showBookingModal = this.showBookingModal.bind(this);
 	}
 
-	getCarsCallback(res) {
-		console.log("Get Cars Callback got:");
+	getCarsCallback(res)
+	{
+    console.log("Get Cars Callback got:");
 		console.log(res);
 		this.setState({
 			cars: res,
@@ -67,12 +66,12 @@ class MapApp extends Component {
 		const postData = {
 			place: "holder"
 		}
-
+    
 		// Make our call to the API
         	callApi('getcars', postData, this.getCarsCallback);
 	}
 
-	componentWillUnmount() 
+  componentWillUnmount() 
 	{
 		navigator.geolocation.clearWatch(this.watchId);
 	}
@@ -91,7 +90,9 @@ class MapApp extends Component {
 	*	Function uses the Haversine distance
 	*	Implementation adapted from GeoSourceData.com's function in Javascript
 	**/
-	static getDistance(lat1, lon1, lat2, lon2) {
+	static getDistance(lat1, lon1, lat2, lon2)
+	{
+	
 		const SEMI_CIRCLE_DEGREES = 180;
 		var radlat1 = Math.PI * lat1/SEMI_CIRCLE_DEGREES;
 	    var radlat2 = Math.PI * lat2/SEMI_CIRCLE_DEGREES;
@@ -135,8 +136,6 @@ class MapApp extends Component {
 			});
 		}
 	}
-
-
 	render(props) {
 		if (this.state.carsLoaded) {
 			let modalClose = () => this.setState({ modalActive: false });
