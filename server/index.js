@@ -85,5 +85,4 @@ app.post("/getcars", function(req, res) {
 app.listen(serverPort);
 console.log(`[Server] API Server running on port: ${serverPort}.`);
 
-
 //connection.end();

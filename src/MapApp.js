@@ -2,37 +2,34 @@ import React, { Component } from 'react';
 import './App.css';
 import CarList from './CarList';
 import JPLMap from './JPLMap';
+import BookingModal from './BookingModal';
 import { Pane } from 'evergreen-ui';
 import { callApi } from './apiActions'
 
-
-class MapApp extends Component
-{
-	state = {
-		response: '',
-		post: '',
-		responseToPost: '',
-		latitude: null,
-		longitude: null,
-		error: null,
-		havePos: null,
-		//Empty array, to be filled by geolocation + db data
-		selectedCar: null,
-		cars: null,
-		carsLoaded: false
-	};
-
-	constructor()
-	{
-		super();
-		// THIS IS SUPER IMPORTANT
+class MapApp extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+	  	response: '',
+			post: '',
+			responseToPost: '',
+			latitude: null,
+			longitude: null,
+			error: null,
+			havePos: null,
+			selectedCar: null,
+			modalActive: false,
+			cars: null,
+			carsLoaded: false
+		};
 		this.getCarsCallback = this.getCarsCallback.bind(this);
+		this.selectCar = this.selectCar.bind(this);
+		this.showBookingModal = this.showBookingModal.bind(this);
 	}
-	
+
 	getCarsCallback(res)
 	{
-
-		console.log("Get Cars Callback got:");
+    console.log("Get Cars Callback got:");
 		console.log(res);
 		this.setState({
 			cars: res,
@@ -69,12 +66,12 @@ class MapApp extends Component
 		const postData = {
 			place: "holder"
 		}
-
+    
 		// Make our call to the API
         	callApi('getcars', postData, this.getCarsCallback);
 	}
 
-	componentWillUnmount() 
+  componentWillUnmount() 
 	{
 		navigator.geolocation.clearWatch(this.watchId);
 	}
@@ -98,24 +95,22 @@ class MapApp extends Component
 	
 		const SEMI_CIRCLE_DEGREES = 180;
 		var radlat1 = Math.PI * lat1/SEMI_CIRCLE_DEGREES;
-		var radlat2 = Math.PI * lat2/SEMI_CIRCLE_DEGREES;
-		var theta = lon1-lon2;
-		var radtheta = Math.PI * theta/SEMI_CIRCLE_DEGREES;
-		var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
-		dist = Math.acos(dist);
-		dist = dist * SEMI_CIRCLE_DEGREES/Math.PI;
-		dist = dist * (SEMI_CIRCLE_DEGREES / 2) * 1.1515;
-		dist = dist * 1.609344;
-		return dist
+	    var radlat2 = Math.PI * lat2/SEMI_CIRCLE_DEGREES;
+	    var theta = lon1-lon2;
+	    var radtheta = Math.PI * theta/SEMI_CIRCLE_DEGREES;
+	    var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+	    dist = Math.acos(dist);
+	    dist = dist * SEMI_CIRCLE_DEGREES/Math.PI;
+	    dist = dist * (SEMI_CIRCLE_DEGREES / 2) * 1.1515;
+	    dist = dist * 1.609344;
+	    return dist;
 	}
 
-	sortCars(userlat, userlong, cars) 
-	{
-
-		for (var car of cars)
+	sortCars(userlat, userlong, cars) {
+		this.state.cars.forEach(function getDistance(car, index) 
 		{
 			car.distance = MapApp.getDistance(userlat, userlong, car.latitude, car.longitude);
-		}
+		});
 
 		this.state.cars.sort(function(a,b) 
 		{
@@ -126,40 +121,43 @@ class MapApp extends Component
 			
 		});
 	}
-	// selectCar = (car) =>
-	// {
-	// 	this.setState({selectedCar: car});
-	// }
+	
+	selectCar(car){
+			this.setState({
+				selectedCar: car
+			});
+	}
 
-
-	render(props)
-	{
-		if (this.state.carsLoaded === true)
-		{
-
+	showBookingModal(car) {
+		this.selectCar(car);
+		if (!(this.state.modalActive)) {
+			this.setState({
+				modalActive: true
+			});
+		}
+	}
+	render(props) {
+		if (this.state.carsLoaded) {
+			let modalClose = () => this.setState({ modalActive: false });
 			var mapCentre;
 			this.sortCars(this.state.latitude, this.state.longitude, this.state.cars);
-			return (
-				
+			if (this.state.selectedCar){
+				mapCentre = [this.state.selectedCar.latitude,this.state.selectedCar.longitude];
+			} else {
+				mapCentre = [0,0];
+			}
+			return (	
 				<Pane Bingmapcont>
-					<CarList userlat={this.state.latitude} userlong={this.state.longitude} cars={this.state.cars} selectCar = {this.selectCar}/>
-					<JPLMap userlat={this.state.latitude} userlong={this.state.longitude} cars={this.state.cars}/>
+					<BookingModal show={this.state.modalActive} car={this.state.selectedCar} onHide={modalClose}/>
+					<CarList userlat={this.state.latitude} userlong={this.state.longitude} cars={this.state.cars} selectCar={this.selectCar} showBookingModal={this.showBookingModal}/>
+					<JPLMap userlat={this.state.latitude} userlong={this.state.longitude} cars={this.state.cars} selectCar={this.selectCar} showBookingModal={this.showBookingModal}/>
 				</Pane>
 
 			);
-		}
-		else 
-			return (<h1> Loading... </h1>)
-
+		} else {
+			return (<h1>Loading...</h1>);
+		}	
 	}
 }
 
 export default MapApp;
-
-
-
-		// if (this.state.selectedCar){
-		// 	mapCentre = [this.state.selectedCar.latitude,this.state.selectedCar.longitude];
-		// } else {
-		// 	mapCentre = [0,0];
-		// }

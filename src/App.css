@@ -30,11 +30,10 @@ p, .nav-link, h1
 	color: #00a5a7 !important;
 }
 
-
-
+/* That this needs to be here and can't be in the JPLMap css is odd. */
 .react-bingmaps
 {
 	width: 100% !important;
 	min-height: 800px !important; /* DEBUG */
-	height: 100% !important;
+	height: 800px !important;
 }
