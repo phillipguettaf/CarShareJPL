@@ -12,14 +12,13 @@ class BookingModal extends Component {
 	}
 
 	render() {
-		
 		return (
 			<Dialog
 				isShown={this.props.show}
 				title={"Book " + (this.props.car == null ? "Dummy Car" : 
 					this.props.car.make + " " + this.props.car.model + " " + this.props.car.rego)}
 				onCloseComplete={this.props.onHide}
-				onConfirm={this.handleSubmit(this.props.car)}
+				onConfirm={() => this.handleSubmit(this.props.car)}
 			>
 				<p>Your car will be reserved for 10 minutes from the booking time.</p>
 				<p>After this time, the car will be available for booking again.</p>
