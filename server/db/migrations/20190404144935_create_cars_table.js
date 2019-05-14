@@ -5,8 +5,8 @@ exports.up = function(knex, Promise) {
   	t.string('make')
   	t.string('model')
   	t.integer('year')
-  	t.float('latitude', 9, 7)
-  	t.float('longitude', 9, 7)
+  	t.float('latitude', 9, 6)
+  	t.float('longitude', 9, 6)
   })
 };
 

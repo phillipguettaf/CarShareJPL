@@ -16,7 +16,11 @@
     "react-geolocated": "^2.4.1",
     "react-geolocation": "^1.0.4",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "2.1.8"
+    "react-scripts": "2.1.8",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "knex": "^0.16.5",
+    "mysql": "^2.17.1"
   },
   "scripts": {
     "start": "npm run server | npm run client",
