@@ -17,6 +17,22 @@ class JPLMap extends Component
 		}
 	}
 
+	userLocation(lat, long) {
+		var info =
+			{
+				"location":[lat, long],
+				"addHandler":"mouseover",
+				"infoboxOption":{htmlContent:
+					<div>
+					</div>
+				},
+				"pushPinOption":{ title: "", color: 'red',},
+				"infoboxAddHandler": {"type" : "click", callback: this.callBackMethod },
+				"pushPinAddHandler": {"type" : "click", callback: this.callBackMethod }
+			}
+		return info;
+	}
+
 	infoBoxBuilder(car) {
 		var info = 
 			{
@@ -50,7 +66,8 @@ class JPLMap extends Component
 				for (var car of this.state.cars) {
 					this.state.infoboxesWithPushPins.push(this.infoBoxBuilder(car));
 				} 
-				this.state.pushPins.push({ "location":[position.coords.latitude, position.coords.longitude], "option":{ color: 'red' }});
+				this.state.infoboxesWithPushPins.push(this.userLocation(position.coords.latitude, position.coords.longitude));
+				
 			},
 			(error) => this.setState({error: error.message}),
 			{ enableHighAccuracy: false, timeout: 20000, maximumAge: 1000},
@@ -77,7 +94,7 @@ class JPLMap extends Component
 					bingmapKey = 'Ak4YC0ivePGISt6hRJCxFzEeCw67C2dnZV5lPncBzK7v4FOPaHjGrbbIoeww90mP'
 					//center = {[this.state.lat, this.state.long]} 
 					center = {mapCentre}
-					pushPins = {this.state.pushPins}
+					//pushPins = {this.state.pushPins}
 					infoboxesWithPushPins = {this.state.infoboxesWithPushPins}
 					>
 				</ReactBingmaps>

@@ -29,12 +29,3 @@ p, .nav-link, h1
 {
 	color: #00a5a7 !important;
 }
-
-
-
-.react-bingmaps
-{
-	width: 100% !important;
-	min-height: 800px !important; /* DEBUG */
-	height: 100% !important;
-}
