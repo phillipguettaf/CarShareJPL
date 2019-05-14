@@ -2,29 +2,50 @@ import React, { Component } from 'react';
 import './App.css';
 import CarList from './CarList';
 import JPLMap from './JPLMap';
+import BookingModal from './BookingModal';
 import { Pane } from 'evergreen-ui';
+import { callApi } from './apiActions'
 
-class MapApp extends Component
-{
-	state = {
+
+
+class MapApp extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
 		response: '',
-		post: '',
-		responseToPost: '',
-		latitude: null,
-		longitude: null,
-		error: null,
-		havePos: null,
-		//Empty array, to be filled by geolocation + db data
-		selectedCar: null,
-		cars: null
-	};
+			post: '',
+			responseToPost: '',
+			latitude: null,
+			longitude: null,
+			error: null,
+			havePos: null,
+			selectedCar: null,
+			modalActive: false,
+			cars: null,
+			carsLoaded: false
+		};
+		this.getCarsCallback = this.getCarsCallback.bind(this);
+		this.selectCar = this.selectCar.bind(this);
+		this.showBookingModal = this.showBookingModal.bind(this);
+	}
 
+	getCarsCallback(res) {
+		console.log("Get Cars Callback got:");
+		console.log(res);
+		this.setState({
+			cars: res,
+			carsLoaded: true
+		});
 
-	componentWillMount() {
+	}
+
+	componentDidMount() 
+	{
 		//navigator.geolocation.getCurrentPosition(
 		//watchPosition lets us update the pin for the user as they move + fixes displaying it!
 		this.watchId = navigator.geolocation.watchPosition(
 			(position) => {
+			console.log(this);
 			this.setState({
 				latitude: position.coords.latitude,
 				longitude: position.coords.longitude,
@@ -39,14 +60,21 @@ class MapApp extends Component
 			(error) => this.setState({error: error.message}),
 			{ enableHighAccuracy: false, timeout: 20000, maximumAge: 1000},
 		);
-		this.setState({cars: this.getCars()}); 
+
+	
+
+		// Setup a basic JSON opject to POST to the node server (mandatory)
+		const postData = {
+			place: "holder"
+		}
+
+		// Make our call to the API
+        	callApi('getcars', postData, this.getCarsCallback);
 	}
 
-	/* componentDidMount() {
-	} */
-
-	componentWillUnmount() {
-    navigator.geolocation.clearWatch(this.watchId);
+	componentWillUnmount() 
+	{
+		navigator.geolocation.clearWatch(this.watchId);
 	}
 
 	/* onTap = (lat, long) => {
@@ -56,18 +84,8 @@ class MapApp extends Component
 		});
 	} */
 
-	getCars() {
-		//return knex.select().from('cars');
-		var cars = [
-			{ rego: '123456', make: 'Ford Falcon', latitude: '-37.807895', longitude: '144.965736', distance: null},
-			{ rego: '132456', make: 'Toyota Camry', latitude: '-37.805153', longitude: '144.967273', distance: null},
-			{ rego: '154326', make: 'Volkswagen Beetle', latitude: '-37.812307', longitude: '144.973477', distance: null},
-			{ rego: '543321', make: 'Mazda 3', latitude: '-37.817710', longitude: '144.954513', distance: null}
-		];
 
-		return cars;
-	}
-
+	// Dude I love C
 	/**	Gets the distance between two points (lat1, lon1) & (lat2, long2)
 	*	and returns it in metres
 	*	Function uses the Haversine distance
@@ -75,7 +93,7 @@ class MapApp extends Component
 	**/
 	static getDistance(lat1, lon1, lat2, lon2) {
 		const SEMI_CIRCLE_DEGREES = 180;
-	    var radlat1 = Math.PI * lat1/SEMI_CIRCLE_DEGREES;
+		var radlat1 = Math.PI * lat1/SEMI_CIRCLE_DEGREES;
 	    var radlat2 = Math.PI * lat2/SEMI_CIRCLE_DEGREES;
 	    var theta = lon1-lon2;
 	    var radtheta = Math.PI * theta/SEMI_CIRCLE_DEGREES;
@@ -84,47 +102,62 @@ class MapApp extends Component
 	    dist = dist * SEMI_CIRCLE_DEGREES/Math.PI;
 	    dist = dist * (SEMI_CIRCLE_DEGREES / 2) * 1.1515;
 	    dist = dist * 1.609344;
-	    return dist
+	    return dist;
 	}
 
 	sortCars(userlat, userlong, cars) {
-
-		for (var car of cars)
+		this.state.cars.forEach(function getDistance(car, index) 
 		{
 			car.distance = MapApp.getDistance(userlat, userlong, car.latitude, car.longitude);
-		}
+		});
 
-		this.state.cars.sort(function(a,b) {
-			if (a.distance < b.distance) {
+		this.state.cars.sort(function(a,b) 
+		{
+			if (a.distance < b.distance)
 				return -1;
-			} else {
+			else
 				return 1;
-			};
+			
 		});
 	}
-	// selectCar = (car) =>
-	// {
-	// 	this.setState({selectedCar: car});
-	// }
+	
+	selectCar(car){
+			this.setState({
+				selectedCar: car
+			});
+	}
+
+	showBookingModal(car) {
+		this.selectCar(car);
+		if (!(this.state.modalActive)) {
+			this.setState({
+				modalActive: true
+			});
+		}
+	}
 
 
-	render(props)
-	{
-		var mapCentre;
-		this.sortCars(this.state.latitude, this.state.longitude, this.state.cars);
-		// if (this.state.selectedCar){
-		// 	mapCentre = [this.state.selectedCar.latitude,this.state.selectedCar.longitude];
-		// } else {
-		// 	mapCentre = [0,0];
-		// }
-		return (
-			
-			<Pane Bingmapcont>
-				<CarList userlat={this.state.latitude} userlong={this.state.longitude} cars={this.state.cars} selectCar = {this.selectCar}/>
-				<JPLMap userlat={this.state.latitude} userlong={this.state.longitude} cars={this.state.cars}/>
-			</Pane>
+	render(props) {
+		if (this.state.carsLoaded) {
+			let modalClose = () => this.setState({ modalActive: false });
+			var mapCentre;
+			this.sortCars(this.state.latitude, this.state.longitude, this.state.cars);
+			if (this.state.selectedCar){
+				mapCentre = [this.state.selectedCar.latitude,this.state.selectedCar.longitude];
+			} else {
+				mapCentre = [0,0];
+			}
+			return (	
+				<Pane Bingmapcont>
+					<BookingModal show={this.state.modalActive} car={this.state.selectedCar} onHide={modalClose}/>
+					<CarList userlat={this.state.latitude} userlong={this.state.longitude} cars={this.state.cars} selectCar={this.selectCar} showBookingModal={this.showBookingModal}/>
+					<JPLMap userlat={this.state.latitude} userlong={this.state.longitude} cars={this.state.cars} selectCar={this.selectCar} showBookingModal={this.showBookingModal}/>
+				</Pane>
 
-		);
+			);
+		} else {
+			return (<h1>Loading...</h1>);
+		}	
 	}
 }
 

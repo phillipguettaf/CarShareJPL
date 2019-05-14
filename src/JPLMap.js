@@ -15,6 +15,7 @@ class JPLMap extends Component
 			userlat: this.props.userlat,
 			cars: this.props.cars
 		}
+		this.showBookingModal = this.showBookingModal.bind(this);
 	}
 
 	userLocation(lat, long) {
@@ -33,6 +34,10 @@ class JPLMap extends Component
 		return info;
 	}
 
+	showBookingModal(car) {
+		return this.props.showBookingModal(car);
+	}
+
 	infoBoxBuilder(car) {
 		var info = 
 			{
@@ -45,7 +50,7 @@ class JPLMap extends Component
 					description: "Distance " + car.distance.toFixed(2) + "km",
 					actions: [{
 						label: 'Book', eventHandler: () => {
-							//this.showBookingModal(car);
+							this.showBookingModal(car);
 						}
 					}]
 
@@ -74,10 +79,8 @@ class JPLMap extends Component
 		);
 	}
 
-	selectCar = (car) =>
-	{
-		this.setState({selectedCar: car});
-	}
+
+	
 
 
 	render(props)
