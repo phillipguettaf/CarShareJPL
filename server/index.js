@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const fs = require("fs");
 const mysql = require('mysql');
-
+const cors = require("cors");
 
 // Make connection to SQL server
 var connection = mysql.createConnection({
@@ -28,6 +28,7 @@ const routes = {
 
 // Use CORS with express
 app.use(bodyParser.json()); // to support JSON-encoded bodies
+app.use(cors())
 app.use(
 	bodyParser.urlencoded({
 		// to support URL-encoded bodies
