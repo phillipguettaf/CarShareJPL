@@ -31,7 +31,7 @@ class CarList extends Component {
 					<EventSeat />
 				</ListItemIcon>
 				<ListItemText 
-					primary={car.make} + {car.model}
+					primary={car.make + " " + car.model}
 					secondary={car.distance.toFixed(2) + "km"}/>
 				<ListItemSecondaryAction>
 					<Button onClick={() => this.showBookingModal(car)}>Book</Button>	
