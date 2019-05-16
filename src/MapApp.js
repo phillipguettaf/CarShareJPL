@@ -10,7 +10,7 @@ class MapApp extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-		response: '',
+			response: '',
 			post: '',
 			responseToPost: '',
 			latitude: null,
@@ -30,8 +30,14 @@ class MapApp extends Component {
 	}
 
 	submitBooking(car) {
+		var postData = {
+			car,
+			user: {
+				email: "test@emailaddress.com.au"
+			}
+		};
 		//need user logged in to save booking data
-		callApi('submitbooking', car, this.submitBookingCallback);
+		callApi('submitbooking', postData, this.submitBookingCallback);
 		this.setState({
 			modalActive: false
 		});
