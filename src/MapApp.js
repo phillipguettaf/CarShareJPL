@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import SideBox from './SideBox'
 import CarList from './CarList';
 import JPLMap from './JPLMap';
 import BookingModal from './BookingModal';
@@ -20,7 +21,9 @@ class MapApp extends Component {
 			selectedCar: null,
 			modalActive: false,
 			cars: null,
-			carsLoaded: false
+			carsLoaded: false,
+			currentBooking: null,
+			sideBoxShown: false
 		};
 		this.submitBooking = this.submitBooking.bind(this);
 		this.submitBookingCallback = this.submitBookingCallback.bind(this);
@@ -159,6 +162,7 @@ class MapApp extends Component {
 			}
 			return (	
 				<Pane Bingmapcont>
+					<SideBox isShown={this.state.sideBoxShown} currentBooking={this.state.currentBooking}/>
 					<BookingModal show={this.state.modalActive} car={this.state.selectedCar} onHide={modalClose} handleSubmit={this.submitBooking}/>
 					<CarList userlat={this.state.latitude} userlong={this.state.longitude} cars={this.state.cars} selectCar={this.selectCar} showBookingModal={this.showBookingModal}/>
 					<JPLMap userlat={this.state.latitude} userlong={this.state.longitude} cars={this.state.cars} showBookingModal={this.showBookingModal}/>
