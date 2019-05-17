@@ -68,6 +68,8 @@ class JPLMap extends Component
 		
 		this.watchId = navigator.geolocation.watchPosition(
 			(position) => {
+				//Remove all elements to prevent old data from piling up
+				this.state.infoboxesWithPushPins.splice(0, this.state.infoboxesWithPushPins.length)
 				for (var car of this.state.cars) {
 					this.state.infoboxesWithPushPins.push(this.infoBoxBuilder(car));
 				} 
