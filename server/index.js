@@ -17,7 +17,7 @@ connection.connect();
 
 
 // Port for the API server
-const serverPort = 8001;
+const serverPort = 8080;
 
 // API Default routes
 const routes = {
