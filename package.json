@@ -23,7 +23,7 @@
     "react-scripts": "2.1.8"
   },
   "scripts": {
-    "start":  "npm run client",
+    "start": "npm run client",
     "devstart": "npm run server | npm run client",
     "client": "react-scripts start",
     "build": "react-scripts build",
@@ -41,5 +41,9 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "author": "Blaise Saunders, Jack Viney, Phillip Guettaf, Liam Wright"
+  "author": "Blaise Saunders, Jack Viney, Phillip Guettaf, Liam Wright",
+  "devDependencies": {
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.13.0"
+  }
 }
