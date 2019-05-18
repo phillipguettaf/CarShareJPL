@@ -15,6 +15,9 @@ function NavBar(props) {
 		    <Button>
 		  		<Link to='/map'><MapIcon/></Link>
 		  	</Button>
+				<Button>
+		  		<Link to='/admin'><MapIcon/></Link>
+		  	</Button>
 	    </Toolbar>
 	</AppBar>
 	);

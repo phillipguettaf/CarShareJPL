@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Route, Link, Redirect} from 'react-router-dom';
 
 import MapApp from './MapApp'
+import Admin from './Admin'
 import TextBox from './TextBox'
 import Header from './Header'
 import SplashScreen from './SplashScreen'
@@ -24,6 +25,7 @@ class App extends Component {
           <NavBar/>
           <TextBox/>
           <Route path='/map' component={MapApp} />
+          <Route path='/admin' component={Admin} />
 
           <Route exact path="/" component={() => <Redirect to="/map" />}/>
         </Router>
