@@ -1,6 +1,7 @@
-.CarList {
-	display: inline;
-	width: 20px;
-	margin: auto;
-	text-align: right;
+/* .test {
+	background-color: #efefef !important;
+} */
+
+primary {
+	color: #efefef !important;
 }
