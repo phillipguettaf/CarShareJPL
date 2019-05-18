@@ -10,9 +10,26 @@ class Admin extends Component {
 	render() {
         return (
             <div>
-                <p>Hello, World!</p>
+                <h1>Administration Console</h1>
+                <p>
+                    <Button variant="contained" color="primary">
+                        Add Car
+                    </Button>
+                </p>
+
+                <p>
+                    <Button variant="contained" color="secondary">
+                        Remove Car
+                    </Button>
+                </p>
+                
+                <p>
+                    <Button variant="contained">
+                        Start Car Simulation
+                    </Button>
+                </p>
             </div>
-        );
+        )
     }
 
 }

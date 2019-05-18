@@ -24,10 +24,11 @@ class App extends Component {
         <Router>
           <NavBar/>
           <TextBox/>
+          <Route path='/splash' component={SplashScreen} />
           <Route path='/map' component={MapApp} />
           <Route path='/admin' component={Admin} />
 
-          <Route exact path="/" component={() => <Redirect to="/map" />}/>
+          <Route exact path="/" component={() => <Redirect to="/splash" />}/>
         </Router>
       </div>
     );
