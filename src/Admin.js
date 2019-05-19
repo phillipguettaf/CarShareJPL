@@ -9,8 +9,27 @@ class Admin extends Component {
         this.state = {
             AddCarModal: false,
         };
+        this.AddCarSubmit = this.AddCarSubmit.bind(this);
         
     }
+
+    
+	AddCarSubmit() {
+        /* TODO: new API call? */
+		/* var postData = {
+			car,
+			user: {
+				email: "test@emailaddress.com.au"
+			}
+		};
+		//need user logged in to save booking data
+		callApi('submitbooking', postData, this.submitBookingCallback);
+        */
+		this.setState({
+			AddCarModal: false
+		}); 
+	}
+
 
     showAddCarModal() {
 		if (!(this.state.AddCarModal)) {
@@ -50,7 +69,7 @@ class Admin extends Component {
 
                 {/* Modals */}
 
-                <AddCarModal show={this.state.AddCarModal} car={this.state.selectedCar} onHide={AddCarModalClose} handleSubmit={this.submitBooking}/>
+                <AddCarModal show={this.state.AddCarModal} car={this.state.selectedCar} onHide={AddCarModalClose} handleSubmit={this.AddCarSubmit}/>
             </div>
         )
     }

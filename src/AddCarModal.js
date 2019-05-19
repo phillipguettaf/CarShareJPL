@@ -9,19 +9,18 @@ class AddCarModal extends Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
-	handleSubmit(car) {
-		return this.props.handleSubmit(car);
+	handleSubmit() {
+		return this.props.handleSubmit();
 	}
 
 	render() {
 		return (
 			<Dialog
 				isShown={this.props.show}
-				title={"Book " + (this.props.car == null ? "Dummy Car" : 
-					this.props.car.make + " " + this.props.car.model + " " + this.props.car.rego)}
+				title={"Add New Car"}
 				onCloseComplete={this.props.onHide}
 
-				onConfirm={() => this.handleSubmit(this.props.car)}
+				onConfirm={() => this.handleSubmit()}
 			>
 				<p>WIP</p>
 				
