@@ -1,6 +1,9 @@
-/* .test {
-	background-color: #efefef !important;
-} */
+/* Why does this need to be !important? TODO */
+p {
+	color: white !important;
+}
+
+
 
 primary {
 	color: #efefef !important;
