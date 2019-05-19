@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Dialog } from 'evergreen-ui';
 
-import './BookingModal.css'
+import './AddCarModal.css'
 
-class BookingModal extends Component {
+class AddCarModal extends Component {
 	constructor(props) {
 		super(props);
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -23,12 +23,11 @@ class BookingModal extends Component {
 
 				onConfirm={() => this.handleSubmit(this.props.car)}
 			>
-				<p>Your car will be reserved for 10 minutes from the booking time.</p>
-				<p>After this time, the car will be available for booking again.</p>
+				<p>WIP</p>
 				
 			</Dialog>
 		);
 	}
 
 }
-export default BookingModal;
+export default AddCarModal;
