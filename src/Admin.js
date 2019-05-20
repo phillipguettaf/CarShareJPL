@@ -16,15 +16,17 @@ class Admin extends Component {
     
 	AddCarSubmit() {
         /* TODO: new API call? */
-		/* var postData = {
-			car,
-			user: {
-				email: "test@emailaddress.com.au"
-			}
+		var postData = {
+            rego, 
+            make, 
+            model, 
+            year, 
+            latitude, 
+            longitude
 		};
 		//need user logged in to save booking data
-		callApi('submitbooking', postData, this.submitBookingCallback);
-        */
+		callApi('addcar', postData, this.submitBookingCallback);
+       
 		this.setState({
 			AddCarModal: false
 		}); 

@@ -34,6 +34,8 @@ class AddCarModal extends Component {
 				onConfirm={() => this.handleSubmit()}
 				>
 			{/* rego, make, model, year, latitude, longitude */}
+
+			{/* Maybe use https://material-ui.com/demos/text-fields/#outlined-input-adornments */}
 			<TextField
 				id="rego"
 				label="Registration"
