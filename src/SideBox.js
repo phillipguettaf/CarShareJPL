@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
-import { Pane, SideSheet, TabList, Card, Heading, Paragraph } from 'evergreen-ui';
+import { Position, Pane, SideSheet, TabList, Card, Heading, Paragraph } from 'evergreen-ui';
 
 class SideBox extends Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {
-			isShown: this.props.isShown,
-			currentBooking: this.props.currentBooking
-		};
+	}
+
+	onHide() {
+		return this.props.onHide();
 	}
 
 	renderBookingBox() {
-		if (this.state.currentBooking) {
+		if (this.props.currentBooking) {
 			return(
 				<Card
 	            backgroundColor="white"
@@ -21,17 +21,18 @@ class SideBox extends Component {
 	            display="flex"
 	            alignItems="center"
 	            justifyContent="center"
+                flexDirection="column"
 	        	>
 	            	<Heading>
-	            		You booked a {this.state.currentBooking.car.make} {this.state.currentBooking.car.model}
-	            		@ {this.state.currentBooking.start}
+                        You booked a {this.props.currentBooking.car.make} {this.props.currentBooking.car.model} <br/>
+                         @ {this.props.currentBooking.createdAt.time}, {this.props.currentBooking.createdAt.date}
 	            	</Heading>
-
-	            	<Paragraph>
-	            		{this.state.currentBooking.car.make}
-	            		{this.state.currentBooking.car.model}
-	            		{this.state.currentBooking.car.rego}
-	            		{this.state.currentBooking.start}
+                   <br/>
+                   <Paragraph>
+                        {this.props.currentBooking.car.make}
+                        {this.props.currentBooking.car.model}<br/>
+                        {this.props.currentBooking.car.rego}<br/>
+                        {this.props.currentBooking.createdAt.time}
 	            	</Paragraph>
 	          </Card>
 			);
@@ -46,7 +47,7 @@ class SideBox extends Component {
 	            justifyContent="center"
 	        	>
 	            	<Heading>
-	            		No cars currently booked
+	            		No car currently booked
 	            	</Heading>
 	          </Card>
 			)
@@ -57,8 +58,9 @@ class SideBox extends Component {
 		var sideBooking = this.renderBookingBox();
 		return (
 			<SideSheet
-				isShown={this.state.isShown}
-				onCloseComplete={() => this.onHide}
+				isShown={this.props.isShown}
+				onCloseComplete={() => this.onHide()}
+				position={Position.LEFT}
 				containerProps={{
 					display: 'flex',
 					flex: '1',
@@ -68,7 +70,6 @@ class SideBox extends Component {
 				<Pane flex="1" overflowY="scroll" background="tint1" padding={16}>
 					{sideBooking}
 				</Pane>
-				}
 			</SideSheet>
 		);
 	}

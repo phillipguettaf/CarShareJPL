@@ -6,8 +6,9 @@ import JPLMap from './JPLMap';
 import BookingModal from './BookingModal';
 import { Pane, toaster } from 'evergreen-ui';
 import { callApi } from './apiActions'
+import NavBar from './navbar'
 
-class MapApp extends Component {
+class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -42,7 +43,8 @@ class MapApp extends Component {
 		//need user logged in to save booking data
 		callApi('submitbooking', postData, this.submitBookingCallback);
 		this.setState({
-			modalActive: false
+			modalActive: false,
+			currentBooking: postData
 		});
 	}
 
@@ -174,5 +176,5 @@ class MapApp extends Component {
 		}	
 	}
 }
-export default MapApp;
+export default App;
 
