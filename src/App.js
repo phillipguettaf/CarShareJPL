@@ -24,7 +24,7 @@ class App extends Component {
           <NavBar/>
           <TextBox/>
           <Route path='/map' component={MapApp} />
-
+          <Route path='/splash' component={SplashScreen} />
           <Route exact path="/" component={() => <Redirect to="/map" />}/>
         </Router>
       </div>
