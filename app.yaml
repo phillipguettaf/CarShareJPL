@@ -1,2 +1,3 @@
 runtime: nodejs
 env: flex
+max_num_instances: 4

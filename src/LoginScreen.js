@@ -115,8 +115,12 @@ class LoginScreen extends React.Component
 					icon="fa-facebook"
 					onFailure={this.loginFailed}
 				        callback={this.responseFacebook} />
-					 <br/>
-					 <GoogleLogin clientId="266867071011-484olagiajdkg9k99qt1e431djngp206.apps.googleusercontent.com"
+					
+					<br/>
+					<br/>
+					<br/>
+					
+					<GoogleLogin clientId="266867071011-484olagiajdkg9k99qt1e431djngp206.apps.googleusercontent.com"
 					scope="profile"
 					fetchBasicProfile={true}
 					onSuccess={this.responseGoogle}>
