@@ -7,7 +7,7 @@ const cors = require("cors");
 
 // Make connection to SQL server
 var connection = mysql.createConnection({
-	host     : '35.244.83.224',
+	host     : '35.201.23.41',
 	user     : 'root',
 	password : 'abc..123', // TODO: Fix lol
 	database : 'JPL'
@@ -81,19 +81,12 @@ app.post("/getcars", function(req, res) {
 
 app.post("/submitbooking", function(req, res) {
 
-	/*
-	 * Delete second "insert" to run completely
-	 * Currently returns an error: no 'start'
-	*/
-
-	var insert = "INSERT INTO bookings(created_at, updated_at, email, rego) VALUES ("
+	var insert = "INSERT INTO bookings(start, end, email, rego) VALUES ("
 	+ "CURRENT_TIMESTAMP(),"
 	+ "CURRENT_TIMESTAMP(),'"
 	+ req.body.user.email + "','"
 	+ req.body.car.rego 
 	+ "');";
-
-//	var insert = "select tab.table_schema as database_schema, tab.table_name as table_name, col.ordinal_position as column_id, col.column_name as column_name, col.data_type as data_type, case when col.numeric_precision is not null then col.numeric_precision else col.character_maximum_length end as max_length, case when col.datetime_precision is not null then col.datetime_precision when col.numeric_scale is not null then col.numeric_scale else 0 end as 'precision' from information_schema.tables as tab inner join information_schema.columns as col on col.table_schema = tab.table_schema and col.table_name = tab.table_name where tab.table_type = 'BASE TABLE' and tab.table_schema not in ('information_schema','mysql', 'performance_schema','sys') and tab.table_schema = 'JPL' order by tab.table_name, col.ordinal_position;"
 
 	connection.query(insert, function (error, results, fields) {
 		
@@ -103,7 +96,7 @@ app.post("/submitbooking", function(req, res) {
 		console.log('Booking submitted ', results);
 			
 		// Dump array of rows to React
-		res.json("Car booked");
+        res.json({ message: "Car booked" });
 
 	});
 });
