@@ -9,26 +9,55 @@ import SplashScreen from './SplashScreen'
 import NavBar from './navbar'
 
 class App extends Component {
+
+constructor()
+{
+	super();
+	this.handleUsername = this.handleUsername.bind(this);
+}
+
   state = {
     response: '',
     post: '',
     responseToPost: '',
+    userName: ''
   };
 
 
-  render() {
-    return (
-      <div className="App">
 
-        <Router>
-          <NavBar/>
-          <TextBox/>
-          <Route path='/map' component={MapApp} />
-          <Route path='/splash' component={SplashScreen} />
-          <Route exact path="/" component={() => <Redirect to="/map" />}/>
-        </Router>
-      </div>
-    );
+handleUsername(data)
+{
+	this.setState({
+		userName: data
+	});
+}
+
+  render()
+  {
+	  if (this.state.userName)
+	  {
+	    return (
+	      <div className="App">
+	      <Router>
+	          <NavBar handleUsername={this.handleUsername} />
+	          <MapApp/>
+	      </Router>
+	      </div>
+	    );
+    	}
+	else
+	{
+		return (
+			<div className='App'>
+			<Router>
+				<NavBar handleUsername={this.handleUsername} />
+				<h1>Welcome to JPL Car Share</h1>
+				<br/>
+				<h2>Driving Innovation</h2>
+			</Router>
+			</div>
+		)
+	}
   }
 }
 

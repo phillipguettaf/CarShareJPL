@@ -10,9 +10,9 @@ import FacebookLogin  from 'react-facebook-login';
 class LoginScreen extends React.Component
 {
 
-	constructor()
+	constructor(props)
 	{
-		super();
+		super(props);
 		this.responseFacebook = this.responseFacebook.bind(this);
 		this.responseGoogle = this.responseGoogle.bind(this);
 		this.loginFailed = this.loginFailed.bind(this);
@@ -26,6 +26,7 @@ class LoginScreen extends React.Component
         };
 
 	}
+
 
     recommendationCallback(product) {
         console.log(product);
@@ -80,7 +81,7 @@ class LoginScreen extends React.Component
 	render(props)
 	{
 
-		let printName = this.props.name;
+		let printName = this.state.name;
 
 		var FontAwesome = require('react-fontawesome');
 
@@ -89,16 +90,16 @@ class LoginScreen extends React.Component
 			if (this.state.havePic)
 			{
 				return (
-					<div class='picBox'>
+					<div class='login'>
 						<img src={ this.state.picUrl } alt="User Profile" class='profilePic' height='60px' />
-						<span>  Now logged in as { printName } </span>
+						<span class='loginText'>  Now logged in as { printName } </span>
 						<br/>
 					</div>
 				)
 			}
 			else {
 				return (
-					<div>
+					<div class='login'>
 						<h3> Now logged in as { printName } </h3>
 					</div>
 				)
@@ -106,21 +107,18 @@ class LoginScreen extends React.Component
 		}
 		else
 			return (
-				<div>
-				<br/>
+				<div class='login'>
 					<FacebookLogin
-					appId="553425088411153"
+					appId="1643021745841527"
 					fields="name,email,picture"
 					scope="public_profile"
 					icon="fa-facebook"
 					onFailure={this.loginFailed}
 				        callback={this.responseFacebook} />
-					
-					<br/>
-					<br/>
-					<br/>
-					
-					<GoogleLogin clientId="266867071011-484olagiajdkg9k99qt1e431djngp206.apps.googleusercontent.com"
+
+
+
+					<GoogleLogin clientId="488759256307-hioftvdmt9sp1aka7dctnaka6vedvl5e.apps.googleusercontent.com"
 					scope="profile"
 					fetchBasicProfile={true}
 					onSuccess={this.responseGoogle}>

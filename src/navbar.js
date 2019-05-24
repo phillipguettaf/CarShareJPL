@@ -5,6 +5,8 @@ import Button from '@material-ui/core/Button';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import SvgIcon from '@material-ui/core/SvgIcon';
 
+import LoginScreen from './LoginScreen'
+
 function NavBar(props) {
 	return (
 	<AppBar position="static" color="primary">
@@ -15,6 +17,7 @@ function NavBar(props) {
 		    <Button>
 		  		<Link to='/map'><MapIcon/></Link>
 		  	</Button>
+			<LoginScreen nameHandler={props.handleUsername} />
 	    </Toolbar>
 	</AppBar>
 	);

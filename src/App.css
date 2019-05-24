@@ -37,3 +37,19 @@ p, .nav-link, h1
 	min-height: 800px !important; /* DEBUG */
 	height: 800px !important;
 }
+
+
+.login
+{
+	margin-left: auto;
+	margin-bottom: auto;
+	margin-top: auto;
+	text-align: center;
+	display:table;
+}
+
+.loginText
+{
+ display:table-cell;
+ vertical-align:middle;
+}
