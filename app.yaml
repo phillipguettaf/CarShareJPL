@@ -1,3 +1,4 @@
 runtime: nodejs
 env: flex
-max_num_instances: 4
+automatic_scaling:
+        max_num_instances: 4
