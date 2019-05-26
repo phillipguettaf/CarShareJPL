@@ -5,6 +5,7 @@
 import React from 'react';
 import GoogleLogin from 'react-google-login';
 import FacebookLogin  from 'react-facebook-login';
+import { Button } from 'evergreen-ui'
 
 class LoginScreen extends React.Component
 {
@@ -16,6 +17,7 @@ class LoginScreen extends React.Component
 		this.responseGoogle = this.responseGoogle.bind(this);
 		this.loginFailed = this.loginFailed.bind(this);
 		this.storeUser = this.storeUser.bind(this);
+		this.logoutFunc = this.logoutFunc.bind(this);
 		this.state = {
 			name: '',
     			loggedIn: false,
@@ -41,6 +43,19 @@ class LoginScreen extends React.Component
 		localStorage.setItem('userstate', JSON.stringify(this.state))
 		console.log("User stored! :^)")
 		console.log(localStorage)
+	}
+
+
+	logoutFunc()
+	{
+		localStorage.removeItem('userstate')
+		this.props.nameHandler('');
+		this.setState({
+			name: '',
+    			loggedIn: false,
+    			havePic: false,
+    			picUrl: true,
+		});
 	}
 
 
@@ -97,8 +112,14 @@ class LoginScreen extends React.Component
 				return (
 					<div class='login'>
 						<img src={ this.state.picUrl } alt="User Profile" class='profilePic' height='60px' />
-						<span class='loginText'>  Logged in as { printName } </span>
-						<br/>
+						<span class='loginText'>
+							
+							Logged in as { printName }   
+						
+							<Button color="secondary" className='logout' onClick={this.logoutFunc}>
+								Logout
+							</Button>
+						</span>
 					</div>
 				)
 			}
@@ -137,3 +158,4 @@ class LoginScreen extends React.Component
 }
 
 export default LoginScreen;
+

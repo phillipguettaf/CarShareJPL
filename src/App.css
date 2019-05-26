@@ -50,6 +50,20 @@ p, .nav-link, h1
 
 .loginText
 {
- display:table-cell;
- vertical-align:middle;
+	display:table-cell;
+	vertical-align:middle;
+	margin-left: 10px;
+	margin-right: 10px;
 }
+
+
+.profilePic
+{
+	margin-right: 10px;
+}
+
+.logout
+{
+	margin-left: 10px !important;
+}
+
