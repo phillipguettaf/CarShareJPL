@@ -52,13 +52,17 @@ class App extends Component {
 		callApi('submitbooking', postData, this.submitBookingCallback);
 		this.setState({
 			modalActive: false,
-			currentBooking: postData
+			//currentBooking: postData
 		});
 	}
 
 	submitBookingCallback(res) {
 		console.log(res);
-		toaster.success("Car booked");
+        this.setState({
+            currentBooking: res
+        });
+        var successMessage = "Car " + this.state.currentBooking + " booked";
+		toaster.success(successMessage);
 	}
 
 	getCarsCallback(res) {

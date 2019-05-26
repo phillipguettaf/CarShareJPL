@@ -24,15 +24,11 @@ class SideBox extends Component {
                 flexDirection="column"
 	        	>
 	            	<Heading>
-                        You booked a {this.props.currentBooking.car.make} {this.props.currentBooking.car.model} <br/>
-                         @ {this.props.currentBooking.createdAt.time}, {this.props.currentBooking.createdAt.date}
+                   {this.props.currentBooking.rego} <br/>
+                         @ {this.props.currentBooking.start}
 	            	</Heading>
                    <br/>
                    <Paragraph>
-                        {this.props.currentBooking.car.make}
-                        {this.props.currentBooking.car.model}<br/>
-                        {this.props.currentBooking.car.rego}<br/>
-                        {this.props.currentBooking.createdAt.time}
 	            	</Paragraph>
 	          </Card>
 			);

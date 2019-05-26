@@ -17,7 +17,7 @@ connection.connect();
 
 
 // Port for the API server
-const serverPort = 8001;
+const serverPort = 8080;
 
 // API Default routes
 const routes = {
@@ -60,7 +60,7 @@ app.post('/login', function (req, res) {
 });
 
 
-// Placeholder function for getting a list of cars
+// function for getting a list of cars
 app.post("/getcars", function(req, res) {
 	console.log('API Called for cars list');
 
@@ -81,24 +81,30 @@ app.post("/getcars", function(req, res) {
 
 app.post("/submitbooking", function(req, res) {
 
-	var insert = "INSERT INTO bookings(start, end, email, rego) VALUES ("
+	var insert = "INSERT INTO bookings(start, end, email, rego)"
+    + " VALUES ("
 	+ "CURRENT_TIMESTAMP(),"
 	+ "CURRENT_TIMESTAMP(),'"
 	+ req.body.user.email + "','"
 	+ req.body.car.rego 
-	+ "');";
+    + "')";
 
 	connection.query(insert, function (error, results, fields) {
-		
-		if (error) throw error;
-
-		// Test output to console
-		console.log('Booking submitted ', results);
-			
-		// Dump array of rows to React
-        res.json({ message: "Car booked" });
-
-	});
+        // Insert the booking
+        if (error) throw error;
+        var getID =  "SELECT LAST_INSERT_ID() as id FROM bookings";
+        connection.query(getID, function (error, results, fields) {
+            // Get the booking's id
+            var id = results[0].id;
+            console.log("ID: ", id);
+            var getBooking = "SELECT * FROM bookings WHERE id = " + id;
+            connection.query(getBooking, function(error, results, fields) {
+                console.log('Booking submitted: number ', results[0].id);
+                // return booking to React
+                res.json(results);
+            });
+        });
+    });
 });
 
 

@@ -1,7 +1,7 @@
 
 function callApi(action, data, callback) {
     // URL Of the API server, needds to be changed on deployment
-    fetch('https://api-dot-jplcarshare.appspot.com/' + action, {
+    fetch('http://localhost:8080/' + action, {
         method: 'POST',
         body: JSON.stringify(data, null, 2), // Prettify the JSON output
         headers: {'Content-Type': 'application/json'}
