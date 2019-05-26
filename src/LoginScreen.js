@@ -1,6 +1,5 @@
 // Programmed by Blaise Saunders
 // s3561722 - s3561722@student.rmit.edu.au
-// Last updated 09/09/2018
 
 
 import React from 'react';
@@ -16,36 +15,50 @@ class LoginScreen extends React.Component
 		this.responseFacebook = this.responseFacebook.bind(this);
 		this.responseGoogle = this.responseGoogle.bind(this);
 		this.loginFailed = this.loginFailed.bind(this);
-        this.recommendationCallback = this.recommendationCallback.bind(this);
-        this.state = {
-                name: '',
+		this.storeUser = this.storeUser.bind(this);
+		this.state = {
+			name: '',
     			loggedIn: false,
     			havePic: false,
     			picUrl: true,
-                recommendation: null,
-        };
+		}; 
 
+		// Try and load a local storage in
+		var user = localStorage.getItem('userstate')
+
+		if (user)
+		{
+			user = JSON.parse(user)
+			this.state = user
+		}
+
+	
+	}
+
+	storeUser()
+	{
+		console.log(this.state)
+		localStorage.setItem('userstate', JSON.stringify(this.state))
+		console.log("User stored! :^)")
+		console.log(localStorage)
 	}
 
 
-    recommendationCallback(product) {
-        console.log(product);
-        this.setState({
-            recommendation: product,
-        });
-    }
-
-	responseFacebook(response) {
+	responseFacebook(response)
+	{
 		this.setState({
 			name: response.name,
 			loggedIn: true,
 			havePic: true,
 			picUrl: response.picture.data.url,
 		});
+	
 		this.props.nameHandler(this.state.name);
-		}
+		this.storeUser()
+	}
 
-	responseGoogle(googleUser) {
+	responseGoogle(googleUser) 
+	{
 		if (!googleUser.isSignedIn())
 			return;
 
@@ -62,19 +75,11 @@ class LoginScreen extends React.Component
 		});
 
 		this.props.nameHandler(this.state.name);
-  }
+		this.storeUser()
+	}
 
 	loginFailed()
 	{
-		/*console.log('Login override');
-		this.setState({
-			name: "TESTUSER",
-			loggedIn: true,
-			havePic: true,
-			picUrl: "https://google.com",
-            recommendation: this.state.recommendation,
-		});
-		this.props.nameHandler("nemmjeff");*/
 		return
 	}
 
@@ -92,7 +97,7 @@ class LoginScreen extends React.Component
 				return (
 					<div class='login'>
 						<img src={ this.state.picUrl } alt="User Profile" class='profilePic' height='60px' />
-						<span class='loginText'>  Now logged in as { printName } </span>
+						<span class='loginText'>  Logged in as { printName } </span>
 						<br/>
 					</div>
 				)
@@ -100,7 +105,7 @@ class LoginScreen extends React.Component
 			else {
 				return (
 					<div class='login'>
-						<h3> Now logged in as { printName } </h3>
+						<h3> Logged in as { printName } </h3>
 					</div>
 				)
 			}

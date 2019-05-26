@@ -14,6 +14,15 @@ constructor()
 {
 	super();
 	this.handleUsername = this.handleUsername.bind(this);
+
+	var user = JSON.parse(localStorage.getItem('userstate'))
+	console.log(localStorage)
+	if (user)
+	{
+		console.log("Found user in localstorage already: "+user.name)
+		this.state = { userName: user.name }
+	}
+
 }
 
   state = {
