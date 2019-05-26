@@ -64,7 +64,7 @@ class MapApp extends Component {
 		//watchPosition lets us update the pin for the user as they move + fixes displaying it!
 		this.watchId = navigator.geolocation.watchPosition(
 			(position) => {
-			console.log(this);
+			//console.log(this);
 			this.setState({
 				latitude: position.coords.latitude,
 				longitude: position.coords.longitude,

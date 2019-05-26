@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from '@material-ui/core';
 import AddCarModal from './AddCarModal';
+import { callApi } from './apiActions'
 
 class Admin extends Component {
 
@@ -14,18 +15,8 @@ class Admin extends Component {
     }
 
     
-	AddCarSubmit() {
-        /* TODO: new API call? */
-		var postData = {
-            rego, 
-            make, 
-            model, 
-            year, 
-            latitude, 
-            longitude
-		};
-		//need user logged in to save booking data
-		callApi('addcar', postData, this.submitBookingCallback);
+	AddCarSubmit(car) {
+		callApi('addcar', car, this.submitBookingCallback);
        
 		this.setState({
 			AddCarModal: false

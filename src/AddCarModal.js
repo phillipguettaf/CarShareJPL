@@ -9,13 +9,20 @@ class AddCarModal extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			carYear: null,
+			car: {
+				rego: null,
+				make: null,
+				model: null,
+				year: null,
+				latitude: null,
+				longitude: null
+			},
 		}
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
 	handleSubmit() {
-		return this.props.handleSubmit();
+		return this.props.handleSubmit(this.state.car);
 	}
 
 	handleChange = event => {
@@ -42,6 +49,7 @@ class AddCarModal extends Component {
 				className={classNames(classes.textField, classes.dense)}
 				margin="dense"
 				variant="outlined"
+				value={this.state.car.rego}
 				/>
 
 			<TextField
@@ -50,6 +58,7 @@ class AddCarModal extends Component {
 				className={classNames(classes.textField, classes.dense)}
 				margin="dense"
 				variant="outlined"
+				value={this.state.car.make}
 				/>
 
 			<TextField
@@ -58,37 +67,17 @@ class AddCarModal extends Component {
 				className={classNames(classes.textField, classes.dense)}
 				margin="dense"
 				variant="outlined"
+				value={this.state.car.model}
 				/>
 
-			<FormControl variant="outlined" className={classes.formControl}>
-				<InputLabel
-					ref={ref => {
-					this.InputLabelRef = ref;
-					}}
-					htmlFor="outlined-year-simple"
-				>
-					Year
-				</InputLabel>
-				<Select
-					value={this.state.age}
-					onChange={this.handleChange}
-					input={
-					<OutlinedInput
-						labelWidth={this.state.labelWidth}
-						name="year"
-						id="outlined-year-simple"
-					/>
-					}
-				>
-					<MenuItem value="">
-					<em>None</em>
-					</MenuItem>
-					{/* TODO: loop to create years */}
-					<MenuItem value={10}>Ten</MenuItem>
-					<MenuItem value={20}>Twenty</MenuItem>
-					<MenuItem value={30}>Thirty</MenuItem>
-				</Select>
-			</FormControl>
+			<TextField
+				id="year"
+				label="Year"
+				className={classNames(classes.textField, classes.dense)}
+				margin="dense"
+				variant="outlined"
+				value={this.state.car.year}
+				/>
 
 			<TextField
 				id="lat"
@@ -96,6 +85,7 @@ class AddCarModal extends Component {
 				className={classNames(classes.textField, classes.dense)}
 				margin="dense"
 				variant="outlined"
+				value={this.state.car.latitude}
 				/>
 
 			<TextField
@@ -104,6 +94,7 @@ class AddCarModal extends Component {
 				className={classNames(classes.textField, classes.dense)}
 				margin="dense"
 				variant="outlined"
+				value={this.state.car.longitude}
 				/>
 				
 			</Dialog>
