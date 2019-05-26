@@ -1,6 +1,5 @@
 .react-bingmaps
 {
-	width: 100% !important;
-	min-height: 800px !important; /* DEBUG */
-	height: 800px !important;
+	width: 100%;
+	height: 90vh; /* Compatibility? */
 }
