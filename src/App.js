@@ -37,6 +37,8 @@ class App extends Component {
 		this.hideSideBar = this.hideSideBar.bind(this);
         this.getPreviousBookings = this.getPreviousBookings.bind(this);
         this.getPreviousBookingsCallback = this.getPreviousBookingsCallback.bind(this);
+        this.returnCar = this.returnCar.bind(this);
+        this.returnCarCallback = this.returnCarCallback.bind(this);
 	}
 
 	submitBooking(car) {
@@ -67,6 +69,18 @@ class App extends Component {
         var successMessage = "Car " + this.state.currentBooking + " booked";
 		toaster.success(successMessage);
 	}
+ 
+    returnCar() {
+        console.log("Returning car...");
+        callApi('returncar', this.state.currentBooking, this.returnCarCallback);
+    }
+    
+    returnCarCallback(res) {
+        this.setState({
+            currentBooking: null
+        });
+        this.getPreviousBookings("test@emailaddress.com.au");
+    }
 
 	getCarsCallback(res) {
 		console.log("Get Cars Callback got:");
@@ -205,7 +219,8 @@ class App extends Component {
 				<Router>	
 					<Pane>
 						<NavBar showSideBar={this.showSideBar}/>
-						<SideBox isShown={this.state.sideBarShown} onHide={this.hideSideBar} currentBooking={this.state.currentBooking} previousBookings={this.state.previousBookings}/>
+						<SideBox isShown={this.state.sideBarShown} onHide={this.hideSideBar} currentBooking={this.state.currentBooking} previousBookings={this.state.previousBookings}
+                            endBooking={this.returnCar}/>
 						<BookingModal show={this.state.modalActive} car={this.state.selectedCar} onHide={modalClose} handleSubmit={this.submitBooking}/>
 						<Pane Bingmapcont>
 							<CarList userlat={this.state.latitude} userlong={this.state.longitude} cars={this.state.cars} selectCar={this.selectCar} showBookingModal={this.showBookingModal}/>

@@ -121,6 +121,20 @@ app.post("/submitbooking", function(req, res) {
     });
 });
 
+app.post("/returncar", function(req, res) {
+    
+    connection.query("START TRANSACTION", function(error, results, fields) {
+        var updateBooking = "UPDATE bookings SET end = CURRENT_TIMESTAMP() WHERE id = '"
+        + req.body.id + "'"
+        connection.query(updateBooking, function(error, results, fields) {
+            connection.query("COMMIT", function(error, results, fields) {
+                console.log("Booking updated");
+                res.json({message: "Booking updated"});
+            });
+        });
+    });
+});
+
 
 // Listen on server port
 app.listen(serverPort);
