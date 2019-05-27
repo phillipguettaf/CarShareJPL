@@ -79,6 +79,20 @@ app.post("/getcars", function(req, res) {
 	});
 });
 
+// To get previous bookings
+app.post("/getpreviousbookings", function(req, res) {
+    
+    var getPreviousBookings = "SELECT * FROM bookings INNER JOIN cars ON bookings.rego=cars.rego WHERE bookings.email = '" + req.body.user
+    + "'";
+    
+    connection.query(getPreviousBookings, function(error, results, fields) {
+        if (error) throw error;
+        console.log("Previous bookings fetched: ", results[0].rego);
+        res.json(results);
+    });
+});
+
+// To submit a booking
 app.post("/submitbooking", function(req, res) {
 
 	var insert = "INSERT INTO bookings(start, end, email, rego)"

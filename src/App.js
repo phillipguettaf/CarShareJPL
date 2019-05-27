@@ -25,7 +25,8 @@ class App extends Component {
 			cars: null,
 			carsLoaded: false,
 			currentBooking: null,
-			sideBarShown: false
+			sideBarShown: false,
+            previousBookings: null
 		};
 		this.submitBooking = this.submitBooking.bind(this);
 		this.submitBookingCallback = this.submitBookingCallback.bind(this);
@@ -34,6 +35,8 @@ class App extends Component {
 		this.showBookingModal = this.showBookingModal.bind(this);
 		this.showSideBar = this.showSideBar.bind(this);
 		this.hideSideBar = this.hideSideBar.bind(this);
+        this.getPreviousBookings = this.getPreviousBookings.bind(this);
+        this.getPreviousBookingsCallback = this.getPreviousBookingsCallback.bind(this);
 	}
 
 	submitBooking(car) {
@@ -74,6 +77,17 @@ class App extends Component {
 		});
 
 	}
+ 
+    getPreviousBookings(email) {
+        callApi('getpreviousbookings', { user: email }, this.getPreviousBookingsCallback);
+    }
+
+    getPreviousBookingsCallback(res) {
+        console.log("Previous bookings gotten");
+        this.setState({
+            previousBookings: res
+        });
+    }
 
 	componentDidMount() 
 	{
@@ -105,7 +119,8 @@ class App extends Component {
 		}
     
 		// Make our call to the API
-        	callApi('getcars', postData, this.getCarsCallback);
+        callApi('getcars', postData, this.getCarsCallback);
+        this.getPreviousBookings("test@emailaddress.com.au");
 	}
 
   componentWillUnmount() 
@@ -190,7 +205,7 @@ class App extends Component {
 				<Router>	
 					<Pane>
 						<NavBar showSideBar={this.showSideBar}/>
-						<SideBox isShown={this.state.sideBarShown} onHide={this.hideSideBar} currentBooking={this.state.currentBooking}/>
+						<SideBox isShown={this.state.sideBarShown} onHide={this.hideSideBar} currentBooking={this.state.currentBooking} previousBookings={this.state.previousBookings}/>
 						<BookingModal show={this.state.modalActive} car={this.state.selectedCar} onHide={modalClose} handleSubmit={this.submitBooking}/>
 						<Pane Bingmapcont>
 							<CarList userlat={this.state.latitude} userlong={this.state.longitude} cars={this.state.cars} selectCar={this.selectCar} showBookingModal={this.showBookingModal}/>

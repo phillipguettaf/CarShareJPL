@@ -11,7 +11,7 @@ class SideBox extends Component {
 		return this.props.onHide();
 	}
 
-	renderBookingBox() {
+	renderCurrentBookingBox() {
 		if (this.props.currentBooking) {
 			return(
 				<Card
@@ -49,9 +49,55 @@ class SideBox extends Component {
 			)
 		}
 	}
+ 
+    renderPreviousBookings() {
+        if (this.props.previousBookings) {
+            var bookingsMap = this.props.previousBookings.map((booking, key) => {
+                return (
+                    <Card
+                    backgroundColor="white"
+                    elevation={0}
+                    height={240}
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    flexDirection="column"
+                    >
+                    <Heading>
+                    {booking.rego} <br/>
+                         @ {booking.start}
+                    </Heading>
+                    <br/>
+                    <Paragraph>
+                    {booking.make} {booking.model}
+                    </Paragraph>
+                    </Card>
+                )
+            });
+            return (
+                bookingsMap
+            )
+        } else {
+            return (
+                <Card
+                backgroundColor="white"
+                elevation={0}
+                height={240}
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                >
+                    <Heading>
+                        No previous bookings
+                    </Heading>
+                </Card>
+            )
+        }
+    }
 
 	render(props) {
-		var sideBooking = this.renderBookingBox();
+		var currentBooking = this.renderCurrentBookingBox();
+        var previousBookings = this.renderPreviousBookings();
 		return (
 			<SideSheet
 				isShown={this.props.isShown}
@@ -63,9 +109,12 @@ class SideBox extends Component {
 					flexdirection: 'column',
 				}}
 			>
-				<Pane flex="1" overflowY="scroll" background="tint1" padding={16}>
-					{sideBooking}
+				<Pane flex="1" overflowY="scroll" background="tint1" padding={16} borderBottom="muted">
+					{currentBooking}
 				</Pane>
+                <Pane flex="1" overflowY="scroll" background="tint1" padding={16}>
+                    {previousBookings}
+                </Pane>
 			</SideSheet>
 		);
 	}
