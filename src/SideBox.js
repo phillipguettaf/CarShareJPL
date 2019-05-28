@@ -57,6 +57,7 @@ class SideBox extends Component {
  
     renderPreviousBookings() {
         if (this.props.previousBookings) {
+            this.props.previousBookings.reverse();
             var bookingsMap = this.props.previousBookings.map((booking, key) => {
                 return (
                     <Card
