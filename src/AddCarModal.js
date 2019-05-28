@@ -9,35 +9,34 @@ class AddCarModal extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			car: {
-				rego: null,
-				make: null,
-				model: null,
-				year: null,
-				latitude: null,
-				longitude: null
-			},
-		}
+            rego: null,
+            make: null,
+            model: null,
+            year: null,
+            latitude: null,
+            longitude: null
+		};
 		this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
 	}
 
 	handleSubmit() {
-        var intYear = parseInt(this.state.car.year, 10);
-        var fLatitude = parseFloat(this.state.car.latitude);
-        var fLongitude = parseFloat(this.state.car.longitude);
+        var intYear = parseInt(this.state.year, 10);
+        var fLatitude = parseFloat(this.state.latitude);
+        var fLongitude = parseFloat(this.state.longitude);
         
         this.setState({
-            car: {
-                year: intYear,
-                latitude: fLatitude,
-                longitude: fLongitude
-            },
+            year: intYear,
+            latitude: fLatitude,
+            longitude: fLongitude
         });
-		return this.props.handleSubmit(this.state.car);
+		return this.props.handleSubmit(this.state);
 	}
 
-	handleChange = event => {
-		this.setState({ [event.target.name]: event.target.value });
+	handleChange = (event) => {
+		this.setState({
+            [event.target.name]: event.target.value
+        });
 	  };
 
 	render() {
@@ -55,57 +54,63 @@ class AddCarModal extends Component {
 
 			{/* Maybe use https://material-ui.com/demos/text-fields/#outlined-input-adornments */}
 			<TextField
-				id="rego"
+				name="rego"
 				label="Registration"
 				className={classNames(classes.textField, classes.dense)}
 				margin="dense"
 				variant="outlined"
-				value={this.state.car.rego}
+				value={this.state.rego}
+                onChange={this.handleChange}
 				/>
 
 			<TextField
-				id="make"
+				name="make"
 				label="Make"
 				className={classNames(classes.textField, classes.dense)}
 				margin="dense"
 				variant="outlined"
-				value={this.state.car.make}
+				value={this.state.make}
+                onChange={this.handleChange}
 				/>
 
 			<TextField
-				id="model"
+				name="model"
 				label="Model"
 				className={classNames(classes.textField, classes.dense)}
 				margin="dense"
 				variant="outlined"
-				value={this.state.car.model}
+				value={this.state.model}
+                onChange={this.handleChange}
 				/>
 
 			<TextField
-				id="year"
+				name="year"
 				label="Year"
 				className={classNames(classes.textField, classes.dense)}
 				margin="dense"
 				variant="outlined"
-				value={this.state.car.year}
+				value={this.state.year}
+                onChange={this.handleChange}
 				/>
 
 			<TextField
-				id="lat"
+				name="latitude"
 				label="Latitude"
 				className={classNames(classes.textField, classes.dense)}
 				margin="dense"
 				variant="outlined"
-				value={this.state.car.latitude}
+				value={this.state.latitude}
+                onChange={this.handleChange}
 				/>
 
 			<TextField
-				id="lon"
+				name="longitude"
 				label="Longitude"
 				className={classNames(classes.textField, classes.dense)}
 				margin="dense"
 				variant="outlined"
-				value={this.state.car.longitude}
+				value={this.state.longitude}
+                onChange={this.handleChange}
 				/>
 				
 			</Dialog>
