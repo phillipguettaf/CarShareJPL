@@ -15,15 +15,15 @@ class App extends Component {
 		this.state = {
 			sideBarShown: false,
 		};
-    this.handleUsername = this.handleUsername.bind(this);
-	  var user = JSON.parse(localStorage.getItem('userstate'))
-	  console.log(localStorage)
+		this.handleUsername = this.handleUsername.bind(this);
+		var user = JSON.parse(localStorage.getItem('userstate'))
+		console.log(localStorage)
 		this.showSideBar = this.showSideBar.bind(this);
-    this.hideSideBar = this.hideSideBar.bind(this);
-    if (user) {
-		  console.log("Found user in localstorage already: "+user.name)
-	  	this.state = { userName: user.name, sideBarShown: false };	
-    }
+		this.hideSideBar = this.hideSideBar.bind(this);
+		if (user) {
+			console.log("Found user in localstorage already: "+user.name)
+			this.state = { userName: user.name, sideBarShown: false };	
+		}
 	}
 
 	showSideBar() {
@@ -40,7 +40,7 @@ class App extends Component {
 
   handleUsername(data) {
     this.setState({
-      userName: data
+      userName: data.name
     });
   }
 
