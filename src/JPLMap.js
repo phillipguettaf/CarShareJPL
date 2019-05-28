@@ -105,7 +105,7 @@ class JPLMap extends Component
 					infoboxesWithPushPins = {this.state.infoboxesWithPushPins}
 					>
 				</ReactBingmaps>
-				<Paypal/>
+				<Paypal total = {10} />
 			</Pane>
 
 		);
