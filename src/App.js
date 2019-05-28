@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import MapApp from './MapApp';
 import NavBar from './navbar'
+import SplashScreen from './SplashScreen'
 import { BrowserRouter as Router } from 'react-router-dom';
 import { HttpsRedirect } from 'react-https-redirect';
 
@@ -59,11 +60,9 @@ class App extends Component {
               
                     <div className="App">
                         <Router>
-                            <NavBar showSideBar={this.showSideBar} handleUsername={this.handleUsername} />
-                            <h1>Welcome to JPL Car Share</h1>
-                            <br/>
-                            <h2>Driving Innovation</h2>
-                        </Router>
+				<NavBar showSideBar={this.showSideBar} handleUsername={this.handleUsername} />
+				<SplashScreen />
+			</Router>
                     </div>
                
             );
