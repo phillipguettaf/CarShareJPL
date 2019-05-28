@@ -87,7 +87,7 @@ app.post("/getpreviousbookings", function(req, res) {
     
     connection.query(getPreviousBookings, function(error, results, fields) {
         if (error) throw error;
-        console.log("Previous bookings fetched: ", results[0].rego);
+       // console.log("Previous bookings fetched: ", results[0].rego);
         res.json(results);
     });
 });
@@ -99,7 +99,7 @@ app.post("/submitbooking", function(req, res) {
     + " VALUES ("
 	+ "CURRENT_TIMESTAMP(),"
 	+ "CURRENT_TIMESTAMP(),'"
-	+ req.body.user.email + "','"
+	+ req.body.user + "','"
 	+ req.body.car.rego 
     + "')";
 
