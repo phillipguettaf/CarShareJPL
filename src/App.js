@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import MapApp from './MapApp';
-import BookingModal from './BookingModal';
-import { Pane, toaster } from 'evergreen-ui';
-import { callApi } from './apiActions'
 import NavBar from './navbar'
-import { BrowserRouter as Router, Route, Link, Redirect} from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { HttpsRedirect } from 'react-https-redirect';
 
 class App extends Component {
@@ -45,33 +42,32 @@ class App extends Component {
     });
   }
 
-  render() {
-	  if (this.state.userName) {
-	    return (
-        <HttpsRedirect>
-	      <div className="App">
-	      <Router>
-	          <NavBar showSideBar={this.showSideBar} handleUsername={this.handleUsername} />
-	          <MapApp sideBarShown={this.state.sideBarShown} hideSideBar={this.hideSideBar} user={this.state.userEmail}/>
-	      </Router>
-	      </div>
-        </HttpsRedirect>
-	    );
-    } else {
-        return (
-          <HttpsRedirect>
-            <div className='App'>
-                <Router>
-                    <NavBar showSideBar={this.showSideBar} handleUsername={this.handleUsername} />
-                    <h1>Welcome to JPL Car Share</h1>
-                    <br/>
-                    <h2>Driving Innovation</h2>
-                </Router>
-            </div>
-          </HttpsRedirect>
-        );
+    render() {
+        if (this.state.userName) {
+            return (
+                
+                  <div className="App">
+                      <Router>
+                          <NavBar showSideBar={this.showSideBar} handleUsername={this.handleUsername} />
+                          <MapApp sideBarShown={this.state.sideBarShown} hideSideBar={this.hideSideBar} user={this.state.userEmail}/>
+                      </Router>
+                  </div>
+                
+            );
+        } else {
+            return (
+              
+                    <div className="App">
+                        <Router>
+                            <NavBar showSideBar={this.showSideBar} handleUsername={this.handleUsername} />
+                            <h1>Welcome to JPL Car Share</h1>
+                            <br/>
+                            <h2>Driving Innovation</h2>
+                        </Router>
+                    </div>
+               
+            );
         }
     }
 }
 export default App;
-

@@ -43,11 +43,7 @@ class MapApp extends Component {
         var stamp = new Date();
         var postData = {
             car,
-            user: this.state.email,
-            createdAt: {
-                time: stamp.getHours() + ":" + stamp.getMinutes(),
-                date: stamp.getDate() + "/" + stamp.getMonth() + "/" + stamp.getFullYear()
-            }
+            user: this.state.email
         };
         //need user logged in to save booking data
         callApi('submitbooking', postData, this.submitBookingCallback);
@@ -62,7 +58,7 @@ class MapApp extends Component {
         this.setState({
             currentBooking: res
         });
-        var successMessage = "Car " + this.state.currentBooking.rego + " booked";
+        var successMessage = "Car " + this.state.selectedCar.rego + " booked";
         toaster.success(successMessage);
     }
  
@@ -75,7 +71,7 @@ class MapApp extends Component {
         this.setState({
             currentBooking: null
         });
-        this.getPreviousBookings(this.state.email);
+        this.getPreviousBookings();
     }
 
     getCarsCallback(res) {
@@ -88,8 +84,11 @@ class MapApp extends Component {
 
     }
  
-    getPreviousBookings(email) {
-        callApi('getpreviousbookings', { user: email }, this.getPreviousBookingsCallback);
+    getPreviousBookings() {
+        var postData = {
+            user: this.state.email
+        };
+        callApi('getpreviousbookings', postData, this.getPreviousBookingsCallback);
     }
 
     getPreviousBookingsCallback(res) {
@@ -130,7 +129,7 @@ class MapApp extends Component {
     
         // Make our call to the API
         callApi('getcars', postData, this.getCarsCallback);
-        this.getPreviousBookings(this.state.email);
+        this.getPreviousBookings();
     }
 
   componentWillUnmount()
