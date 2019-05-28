@@ -3,6 +3,8 @@ import './JPLMap.css';
 import { Pane } from 'evergreen-ui';
 import { Button } from '@material-ui/core';
 import { ReactBingmaps } from 'react-bingmaps';
+import Paypal from './Paypal'
+
 
 class JPLMap extends Component
 {
@@ -102,6 +104,7 @@ class JPLMap extends Component
 					infoboxesWithPushPins = {this.state.infoboxesWithPushPins}
 					>
 				</ReactBingmaps>
+				<Paypal/>
 			</Pane>
 
 		);

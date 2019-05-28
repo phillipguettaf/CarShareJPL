@@ -22,19 +22,21 @@
     "react-geolocated": "^2.4.1",
     "react-geolocation": "^1.0.4",
     "react-google-login": "^5.0.4",
+    "react-https-redirect": "^1.1.0",
+    "react-paypal-express-checkout": "^1.0.5",
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8"
   },
   "scripts": {
-	"start": "serve -s build",
-  	"prestart": "npm install -g serve",
-    	"oldstart": "react-scripts start",
-    	"devstart": "npm run server | npm run client",
-    	"client": "react-scripts start",
-    	"build": "react-scripts build",
-    	"test": "react-scripts test",
-    	"eject": "react-scripts eject",
-    	"server": "node server/index.js >> log.txt"
+    "start": "serve -s build",
+    "prestart": "npm install -g serve",
+    "oldstart": "react-scripts start",
+    "devstart": "npm run server | npm run client",
+    "client": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "server": "node server/index.js >> log.txt"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -1,13 +1,14 @@
 .App {
   text-align: center;
   word-spacing: 0px !important;
-  background-color: #232323;
   height: 100% !important;
 }
 
 html, body, #root
 {
 	height: 100% !important;
+	background-color: #232323;
+	margin-bottom: 20px;
 }
 
 a { color: inherit !important; }
@@ -15,6 +16,11 @@ a { color: inherit !important; }
 p, .nav-link, h1
 {
 	color: #efefef !important;
+}
+
+h2
+{
+	color: #cf9911
 }
 
 .navbar
@@ -67,3 +73,12 @@ p, .nav-link, h1
 	margin-left: 10px !important;
 }
 
+
+
+.info-text
+{
+	color: #00a5a7;
+	max-width: 60%;
+	margin-left: auto;
+	margin-right: auto;
+}

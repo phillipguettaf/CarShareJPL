@@ -7,6 +7,7 @@ import TextBox from './TextBox'
 import Header from './Header'
 import SplashScreen from './SplashScreen'
 import NavBar from './navbar'
+import HttpsRedirect from 'react-https-redirect'
 
 class App extends Component {
 
@@ -43,29 +44,31 @@ handleUsername(data)
 
   render()
   {
-	  if (this.state.userName)
-	  {
+	if (this.state.userName)
+	{
 	    return (
-	      <div className="App">
-	      <Router>
-	          <NavBar handleUsername={this.handleUsername} />
-	          <MapApp/>
-	      </Router>
-	      </div>
+		<HttpsRedirect>
+			<div className="App">
+				<Router>
+					<NavBar handleUsername={this.handleUsername} />
+					<MapApp/>
+				</Router>
+			</div>
+		</HttpsRedirect>
 	    );
     	}
 	else
 	{
 		return (
-			<div className='App'>
-			<Router>
-				<NavBar handleUsername={this.handleUsername} />
-				<h1>Welcome to JPL Car Share</h1>
-				<br/>
-				<h2>Driving Innovation</h2>
-			</Router>
-			</div>
-		)
+			<HttpsRedirect>
+				<div className='App'>
+				<Router>
+					<NavBar handleUsername={this.handleUsername} />
+					<SplashScreen/>
+				</Router>
+				</div>
+			</HttpsRedirect>
+		);
 	}
   }
 }
