@@ -11,6 +11,7 @@ import Paypal from './Paypal';
 import { BrowserRouter as Router, Route, Link, Redirect} from 'react-router-dom';
 
 class MapApp extends Component {
+
     constructor(props) {
         super(props);
         this.state = {

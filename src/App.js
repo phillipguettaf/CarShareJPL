@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
+import { BrowserRouter as Router, Route, Link, Redirect} from 'react-router-dom';
+import MapApp from './MapApp'
+import Admin from './Admin'
+import TextBox from './TextBox'
+import Header from './Header'
+import SplashScreen from './SplashScreen'
 import MapApp from './MapApp';
 import NavBar from './navbar'
 import SplashScreen from './SplashScreen'
@@ -60,9 +66,9 @@ class App extends Component {
               
                     <div className="App">
                         <Router>
-				<NavBar showSideBar={this.showSideBar} handleUsername={this.handleUsername} />
-				<SplashScreen />
-			</Router>
+                        <NavBar showSideBar={this.showSideBar} handleUsername={this.handleUsername} />
+                        <SplashScreen />
+                      </Router>
                     </div>
                
             );
