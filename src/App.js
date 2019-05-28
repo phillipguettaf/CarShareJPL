@@ -9,26 +9,64 @@ import SplashScreen from './SplashScreen'
 import NavBar from './navbar'
 
 class App extends Component {
+
+constructor()
+{
+	super();
+	this.handleUsername = this.handleUsername.bind(this);
+
+	var user = JSON.parse(localStorage.getItem('userstate'))
+	console.log(localStorage)
+	if (user)
+	{
+		console.log("Found user in localstorage already: "+user.name)
+		this.state = { userName: user.name }
+	}
+
+}
+
   state = {
     response: '',
     post: '',
     responseToPost: '',
+    userName: ''
   };
 
 
-  render() {
-    return (
-      <div className="App">
 
-        <Router>
-          <NavBar/>
-          <TextBox/>
-          <Route path='/map' component={MapApp} />
+handleUsername(data)
+{
+	this.setState({
+		userName: data
+	});
+}
 
-          <Route exact path="/" component={() => <Redirect to="/map" />}/>
-        </Router>
-      </div>
-    );
+  render()
+  {
+	  if (this.state.userName)
+	  {
+	    return (
+	      <div className="App">
+	      <Router>
+	          <NavBar handleUsername={this.handleUsername} />
+	          <MapApp/>
+	      </Router>
+	      </div>
+	    );
+    	}
+	else
+	{
+		return (
+			<div className='App'>
+			<Router>
+				<NavBar handleUsername={this.handleUsername} />
+				<h1>Welcome to JPL Car Share</h1>
+				<br/>
+				<h2>Driving Innovation</h2>
+			</Router>
+			</div>
+		)
+	}
   }
 }
 

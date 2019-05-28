@@ -61,7 +61,7 @@ class MapApp extends Component {
 
 	}
 
-	componentDidMount() 
+	componentDidMount()
 	{
 		//navigator.geolocation.getCurrentPosition(
 		//watchPosition lets us update the pin for the user as they move + fixes displaying it!
@@ -83,18 +83,18 @@ class MapApp extends Component {
 			{ enableHighAccuracy: false, timeout: 20000, maximumAge: 1000},
 		);
 
-	
+
 
 		// Setup a basic JSON opject to POST to the node server (mandatory)
 		const postData = {
 			place: "holder"
 		}
-    
+
 		// Make our call to the API
         	callApi('getcars', postData, this.getCarsCallback);
 	}
 
-  componentWillUnmount() 
+  componentWillUnmount()
 	{
 		navigator.geolocation.clearWatch(this.watchId);
 	}
@@ -120,21 +120,21 @@ class MapApp extends Component {
 	}
 
 	sortCars(userlat, userlong, cars) {
-		this.state.cars.forEach(function getDistance(car, index) 
+		this.state.cars.forEach(function getDistance(car, index)
 		{
 			car.distance = MapApp.getDistance(userlat, userlong, car.latitude, car.longitude);
 		});
 
-		this.state.cars.sort(function(a,b) 
+		this.state.cars.sort(function(a,b)
 		{
 			if (a.distance < b.distance)
 				return -1;
 			else
 				return 1;
-			
+
 		});
 	}
-	
+
 	selectCar(car){
 			this.setState({
 				selectedCar: car
@@ -160,7 +160,7 @@ class MapApp extends Component {
 			} else {
 				mapCentre = [0,0];
 			}
-			return (	
+			return (
 				<Pane Bingmapcont>
 					<SideBox isShown={this.state.sideBoxShown} currentBooking={this.state.currentBooking}/>
 					<BookingModal show={this.state.modalActive} car={this.state.selectedCar} onHide={modalClose} handleSubmit={this.submitBooking}/>
@@ -171,8 +171,7 @@ class MapApp extends Component {
 			);
 		} else {
 			return (<h1>Loading...</h1>);
-		}	
+		}
 	}
 }
 export default MapApp;
-
