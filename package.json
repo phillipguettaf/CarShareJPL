@@ -22,6 +22,8 @@
     "react-geolocated": "^2.4.1",
     "react-geolocation": "^1.0.4",
     "react-google-login": "^5.0.4",
+    "react-https-redirect": "^1.1.0",
+    "react-paypal-express-checkout": "^1.0.5",
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8"
   },

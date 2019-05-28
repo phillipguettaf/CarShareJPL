@@ -6,6 +6,7 @@ import { Pane, toaster } from 'evergreen-ui';
 import { callApi } from './apiActions'
 import NavBar from './navbar'
 import { BrowserRouter as Router, Route, Link, Redirect} from 'react-router-dom';
+import HttpsRedirect from 'react-https-redirect'
 
 class App extends Component {
   
@@ -46,15 +47,18 @@ class App extends Component {
   render() {
 	  if (this.state.userName) {
 	    return (
+        <HttpsRedirect>
 	      <div className="App">
 	      <Router>
 	          <NavBar showSideBar={this.showSideBar} handleUsername={this.handleUsername} />
 	          <MapApp sideBarShown={this.state.sideBarShown} hideSideBar={this.hideSideBar}/>
 	      </Router>
 	      </div>
+        </HttpsRedirect>
 	    );
     } else {
         return (
+          <HttpsRedirect>
             <div className='App'>
                 <Router>
                     <NavBar showSideBar={this.showSideBar} handleUsername={this.handleUsername} />
@@ -63,6 +67,7 @@ class App extends Component {
                     <h2>Driving Innovation</h2>
                 </Router>
             </div>
+          </HttpsRedirect>
         );
         }
     }

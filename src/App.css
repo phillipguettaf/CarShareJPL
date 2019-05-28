@@ -8,6 +8,8 @@
 html, body, #root
 {
 	height: 100% !important;
+	/*background-color: #232323;*/
+	margin-bottom: 20px;
 }
 
 a { color: inherit !important; }
@@ -15,6 +17,11 @@ a { color: inherit !important; }
 /* p, .nav-link, h1
 {
 	color: #efefef !important;
+}
+
+h2
+{
+	color: #cf9911
 }
 
 .navbar
@@ -65,4 +72,13 @@ a { color: inherit !important; }
 .logout
 {
 	margin-left: 10px !important;
+}
+
+
+.info-text
+{
+	color: #00a5a7;
+	max-width: 60%;
+	margin-left: auto;
+	margin-right: auto;
 }
