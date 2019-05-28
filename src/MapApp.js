@@ -4,9 +4,10 @@ import SideBox from './SideBox'
 import CarList from './CarList';
 import JPLMap from './JPLMap';
 import BookingModal from './BookingModal';
-import { Pane, toaster } from 'evergreen-ui';
+import { Pane, toaster, Dialog, Heading } from 'evergreen-ui';
 import { callApi } from './apiActions'
-import NavBar from './navbar'
+import NavBar from './navbar';
+import Paypal from './Paypal';
 import { BrowserRouter as Router, Route, Link, Redirect} from 'react-router-dom';
 
 class MapApp extends Component {
@@ -26,7 +27,8 @@ class MapApp extends Component {
             carsLoaded: false,
             currentBooking: null,
             previousBookings: null,
-            email: this.props.user
+            email: this.props.user,
+            showPaypal: false
         };
         this.submitBooking = this.submitBooking.bind(this);
         this.submitBookingCallback = this.submitBookingCallback.bind(this);
@@ -64,6 +66,10 @@ class MapApp extends Component {
  
     returnCar() {
         console.log("Returning car...");
+        this.props.hideSideBar();
+        this.setState({
+            showPaypal: true
+        });
         callApi('returncar', this.state.currentBooking, this.returnCarCallback);
     }
     
@@ -71,6 +77,7 @@ class MapApp extends Component {
         this.setState({
             currentBooking: null
         });
+        toaster.success("Car returned");
         this.getPreviousBookings();
     }
 
@@ -207,6 +214,10 @@ class MapApp extends Component {
             return (
                 <Router>
                     <Pane>
+                        <Dialog isShown={this.state.showPaypal} hasHeader={false} hasFooter={false} title="Payment">
+                            <Heading>Pay</Heading>
+                            <Paypal total={10}/>
+                        </Dialog>
                         <SideBox isShown={this.props.sideBarShown} onHide={this.props.hideSideBar} currentBooking={this.state.currentBooking} previousBookings={this.state.previousBookings}
                             endBooking={this.returnCar}/>
                         <BookingModal show={this.state.modalActive} car={this.state.selectedCar} onHide={modalClose} handleSubmit={this.submitBooking}/>
