@@ -1,19 +1,20 @@
 .App {
   text-align: center;
   word-spacing: 0px !important;
+  /* background-color: #232323; */
   height: 100% !important;
 }
 
 html, body, #root
 {
 	height: 100% !important;
-	background-color: #232323;
+	/*background-color: #232323;*/
 	margin-bottom: 20px;
 }
 
 a { color: inherit !important; }
 
-p, .nav-link, h1
+/* p, .nav-link, h1
 {
 	color: #efefef !important;
 }
@@ -72,7 +73,6 @@ h2
 {
 	margin-left: 10px !important;
 }
-
 
 
 .info-text

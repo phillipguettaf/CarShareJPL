@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import './JPLMap.css';
 import { Pane } from 'evergreen-ui';
 import { Button } from '@material-ui/core';
 import { ReactBingmaps } from 'react-bingmaps';
 import Paypal from './Paypal'
 
+
+import './JPLMap.css';
 
 class JPLMap extends Component
 {
