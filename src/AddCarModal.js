@@ -22,6 +22,17 @@ class AddCarModal extends Component {
 	}
 
 	handleSubmit() {
+        var intYear = parseInt(this.state.car.year, 10);
+        var fLatitude = parseFloat(this.state.car.latitude);
+        var fLongitude = parseFloat(this.state.car.longitude);
+        
+        this.setState({
+            car: {
+                year: intYear,
+                latitude: fLatitude,
+                longitude: fLongitude
+            },
+        });
 		return this.props.handleSubmit(this.state.car);
 	}
 
