@@ -8,7 +8,10 @@ import SvgIcon from '@material-ui/core/SvgIcon';
 
 class NavBar extends Component {
 
-	constructor(props) {
+import LoginScreen from './LoginScreen'
+import './navbar.css';
+
+constructor(props) {
 		super(props);
 	}
 
@@ -23,6 +26,7 @@ class NavBar extends Component {
 			  		<Button onClick={() => this.showSideBar()}>
 			  			<Menu/>
 			  		</Button>
+            <LoginScreen nameHandler={props.handleUsername} />
 			    </Toolbar>
 			</AppBar>
 		);

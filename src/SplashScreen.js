@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 
-
 class SplashScreen extends Component
 {
 	state = {
@@ -21,6 +20,7 @@ class SplashScreen extends Component
 		return (
 			<div className="SplashScreen">
 				<h1> HOWDY </h1>
+
 			</div>
 		);
 	}

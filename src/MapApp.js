@@ -225,4 +225,3 @@ class MapApp extends Component {
     }
 }
 export default MapApp;
-

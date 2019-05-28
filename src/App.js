@@ -8,13 +8,21 @@ import NavBar from './navbar'
 import { BrowserRouter as Router, Route, Link, Redirect} from 'react-router-dom';
 
 class App extends Component {
+  
 	constructor(props) {
 		super(props);
 		this.state = {
 			sideBarShown: false,
 		};
+    this.handleUsername = this.handleUsername.bind(this);
+	  var user = JSON.parse(localStorage.getItem('userstate'))
+	  console.log(localStorage)
 		this.showSideBar = this.showSideBar.bind(this);
-        this.hideSideBar = this.hideSideBar.bind(this);
+    this.hideSideBar = this.hideSideBar.bind(this);
+    if (user) {
+		  console.log("Found user in localstorage already: "+user.name)
+	  	this.state = { userName: user.name, sideBarShown: false };	
+    }
 	}
 
 	showSideBar() {
@@ -29,16 +37,34 @@ class App extends Component {
         });
     }
 
-	render(props) {
-			return (
-				<Router>	
-					<Pane>
-						<NavBar showSideBar={this.showSideBar}/>
-						<MapApp sideBarShown={this.state.sideBarShown} hideSideBar={this.hideSideBar}/>
-					</Pane>
-				</Router>
-			);
-	}
+  handleUsername(data) {
+    this.setState({
+      userName: data
+    });
+  }
+
+  render() {
+	  if (this.state.userName) {
+	    return (
+	      <div className="App">
+	      <Router>
+	          <NavBar showSideBar={this.showSideBar} handleUsername={this.handleUsername} />
+	          <MapApp sideBarShown={this.state.sideBarShown} hideSideBar={this.hideSideBar}/>
+	      </Router>
+	      </div>
+	    );
+    } else {
+		  return (
+			  <div className='App'>
+			    <Router>
+			  	  <NavBar showSideBar={this.showSideBar} handleUsername={this.handleUsername} />
+			  	  <h1>Welcome to JPL Car Share</h1>
+			  	  <br/>
+			  	  <h2>Driving Innovation</h2>
+			    </Router>
+			  </div>
+		);
+  }
 }
 export default App;
 
