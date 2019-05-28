@@ -7,7 +7,7 @@ const cors = require("cors");
 
 // Make connection to SQL server
 var connection = mysql.createConnection({
-	host     : '35.244.83.224',
+	host     : '35.201.23.41',
 	user     : 'root',
 	password : 'abc..123', // TODO: Fix lol
 	database : 'JPL'
@@ -28,7 +28,7 @@ const routes = {
 
 // Use CORS with express
 app.use(bodyParser.json()); // to support JSON-encoded bodies
-app.use(cors())
+app.use(cors());
 app.use(
 	bodyParser.urlencoded({
 		// to support URL-encoded bodies
@@ -60,7 +60,7 @@ app.post('/login', function (req, res) {
 });
 
 
-// Placeholder function for getting a list of cars
+// function for getting a list of cars
 app.post("/getcars", function(req, res) {
 	console.log('API Called for cars list');
 
@@ -79,16 +79,60 @@ app.post("/getcars", function(req, res) {
 	});
 });
 
+// To get previous bookings
+app.post("/getpreviousbookings", function(req, res) {
+    
+    var getPreviousBookings = "SELECT * FROM bookings INNER JOIN cars ON bookings.rego=cars.rego WHERE bookings.email = '" + req.body.user
+    + "'";
+    
+    connection.query(getPreviousBookings, function(error, results, fields) {
+        if (error) throw error;
+       // console.log("Previous bookings fetched: ", results[0].rego);
+        res.json(results);
+    });
+});
+
+// To submit a booking
 app.post("/submitbooking", function(req, res) {
-	console.log('Booking submitted: ');
-	//	Need the user logged in to save booking data
-	// var insert = "INSERT INTO bookings(id, start, end, email, rego) VALUES ('" 
-	// + new Date() + "','"
-	// + " ','"
-	// + res.body.user.email + "','"
-	// + res.body.car.rego 
-	// + "'') COMMIT;"
-	res.json({message: "Booking made."});
+
+	var insert = "INSERT INTO bookings(start, end, email, rego)"
+    + " VALUES ("
+	+ "CURRENT_TIMESTAMP(),"
+	+ "CURRENT_TIMESTAMP(),'"
+	+ req.body.user + "','"
+	+ req.body.car.rego 
+    + "')";
+
+	connection.query(insert, function (error, results, fields) {
+        // Insert the booking
+        if (error) throw error;
+        var getID =  "SELECT LAST_INSERT_ID() as id FROM bookings";
+        connection.query(getID, function (error, results, fields) {
+            // Get the booking's id
+            var id = results[0].id;
+            console.log("ID: ", id);
+            var getBooking = "SELECT * FROM bookings WHERE id = " + id;
+            connection.query(getBooking, function(error, results, fields) {
+                console.log('Booking submitted: number ', results[0].id);
+                // return booking to React
+                res.json(results);
+            });
+        });
+    });
+});
+
+app.post("/returncar", function(req, res) {
+    
+    connection.query("START TRANSACTION", function(error, results, fields) {
+        var updateBooking = "UPDATE bookings SET end = CURRENT_TIMESTAMP() WHERE id = '"
+        + req.body.id + "'"
+        connection.query(updateBooking, function(error, results, fields) {
+            connection.query("COMMIT", function(error, results, fields) {
+                console.log("Booking updated");
+                res.json({message: "Booking updated"});
+            });
+        });
+    });
 });
 
 app.post("/addcar", function(req, res) {

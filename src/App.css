@@ -1,20 +1,28 @@
+
 .App {
   text-align: center;
   word-spacing: 0px !important;
-  background-color: #232323;
+  /* background-color: #232323; */
   height: 100% !important;
 }
 
 html, body, #root
 {
 	height: 100% !important;
+	/*background-color: #232323;*/
+	margin-bottom: 20px;
 }
 
 a { color: inherit !important; }
 
-p, .nav-link, h1
+/* p, .nav-link, h1
 {
 	color: #efefef !important;
+}
+
+h2
+{
+	color: #cf9911
 }
 
 .navbar
@@ -36,4 +44,97 @@ p, .nav-link, h1
 	width: 100% !important;
 	min-height: 800px !important; /* DEBUG */
 	height: 800px !important;
+}
+
+
+.login
+{
+	margin-left: auto;
+	margin-bottom: auto;
+	margin-top: auto;
+	text-align: center;
+	display:table;
+}
+
+.loginText
+{
+	display:table-cell;
+	vertical-align:middle;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+
+.profilePic
+{
+	margin-right: 10px;
+}
+
+.logout
+{
+	margin-left: 10px !important;
+}
+
+
+.info-text
+{
+	color: #00a5a7;
+	max-width: 60%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+
+
+.logo
+{
+	max-height: 400px;
+}
+
+.infobox
+{
+	max-width: 40%;
+	margin-left: auto;
+	margin-right: auto;
+	display: table;
+}
+
+.infoimg
+{
+	float: left;
+	max-width: 49%;
+}
+.infotext
+{
+	max-width: 49%;
+	float: right;
+	vertical-align: middle;
+}
+.aff-logo
+{
+	max-height: 50px !important;
+}
+
+#root, body, html
+{
+
+	margin: 0;
+
+}
+
+
+.SplashScreen
+{
+	height: 100%;
+	/*background-image: url("https://i.imgur.com/GqZkfE6.jpg"), url("https://upload.wikimedia.org/wikipedia/commons/1/1e/A_blank_black_picture.jpg");
+	background-blend-mode: lighten;*/
+
+
+	/* Full height */
+	height: 100%;
+
+	/* Center and scale the image nicely */
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
 }

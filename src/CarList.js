@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, List, ListItem, ListItemIcon, ListItemText, ListItemSecondaryAction } from '@material-ui/core';
-import { EventSeat } from '@material-ui/icons';
+import { DirectionsCar } from '@material-ui/icons';
 import { Pane } from 'evergreen-ui';
 
 import './CarList.css';
@@ -25,12 +25,16 @@ class CarList extends Component {
 	}
 
 	render(props) {
+		const classes  = this.props;
 		const carlist = this.state.cars.map((car)=>
 				<ListItem button onClick={() => this.selectCar(car)}>
 				<ListItemIcon>
-					<EventSeat />
+					<DirectionsCar />
 				</ListItemIcon>
 				<ListItemText 
+					classes={{
+						primary: classes.primary
+					}}
 					primary={car.make + " " + car.model}
 					secondary={car.distance.toFixed(2) + "km"}/>
 				<ListItemSecondaryAction>
@@ -40,15 +44,14 @@ class CarList extends Component {
 				);
 	
 		return (
-			
 			<Pane CarList
 				elevation={0}
 			    float="left"
 			    width={400}
 			    display="flex"
-			    flexDirection="column"
+				flexDirection="column"
 			>
-				<List component="Cars">
+				<List component="Cars" className = "test">
 					{carlist}
 				</List>
 			</Pane>
