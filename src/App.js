@@ -40,7 +40,8 @@ class App extends Component {
 
   handleUsername(data) {
     this.setState({
-      userName: data.name
+      userName: data.name,
+      userEmail: data.email
     });
   }
 
