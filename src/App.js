@@ -6,7 +6,7 @@ import { Pane, toaster } from 'evergreen-ui';
 import { callApi } from './apiActions'
 import NavBar from './navbar'
 import { BrowserRouter as Router, Route, Link, Redirect} from 'react-router-dom';
-import HttpsRedirect from 'react-https-redirect'
+import { HttpsRedirect } from 'react-https-redirect';
 
 class App extends Component {
   
@@ -22,7 +22,7 @@ class App extends Component {
 		this.hideSideBar = this.hideSideBar.bind(this);
 		if (user) {
 			console.log("Found user in localstorage already: "+user.name)
-			this.state = { userName: user.name, sideBarShown: false };	
+			this.state = { userName: user.name, userEmail: user.email, sideBarShown: false };
 		}
 	}
 
@@ -52,7 +52,7 @@ class App extends Component {
 	      <div className="App">
 	      <Router>
 	          <NavBar showSideBar={this.showSideBar} handleUsername={this.handleUsername} />
-	          <MapApp sideBarShown={this.state.sideBarShown} hideSideBar={this.hideSideBar}/>
+	          <MapApp sideBarShown={this.state.sideBarShown} hideSideBar={this.hideSideBar} user={this.state.userEmail}/>
 	      </Router>
 	      </div>
         </HttpsRedirect>

@@ -25,7 +25,8 @@ class MapApp extends Component {
             cars: null,
             carsLoaded: false,
             currentBooking: null,
-            previousBookings: null
+            previousBookings: null,
+            email: this.props.user
         };
         this.submitBooking = this.submitBooking.bind(this);
         this.submitBookingCallback = this.submitBookingCallback.bind(this);
@@ -42,9 +43,7 @@ class MapApp extends Component {
         var stamp = new Date();
         var postData = {
             car,
-            user: {
-                email: "test@emailaddress.com.au"
-            },
+            user: this.state.email,
             createdAt: {
                 time: stamp.getHours() + ":" + stamp.getMinutes(),
                 date: stamp.getDate() + "/" + stamp.getMonth() + "/" + stamp.getFullYear()
@@ -63,7 +62,7 @@ class MapApp extends Component {
         this.setState({
             currentBooking: res
         });
-        var successMessage = "Car " + this.state.currentBooking + " booked";
+        var successMessage = "Car " + this.state.currentBooking.rego + " booked";
         toaster.success(successMessage);
     }
  
@@ -76,7 +75,7 @@ class MapApp extends Component {
         this.setState({
             currentBooking: null
         });
-        this.getPreviousBookings("test@emailaddress.com.au");
+        this.getPreviousBookings(this.state.email);
     }
 
     getCarsCallback(res) {
@@ -131,7 +130,7 @@ class MapApp extends Component {
     
         // Make our call to the API
         callApi('getcars', postData, this.getCarsCallback);
-        this.getPreviousBookings("test@emailaddress.com.au");
+        this.getPreviousBookings(this.state.email);
     }
 
   componentWillUnmount()
