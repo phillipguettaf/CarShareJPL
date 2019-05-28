@@ -23,6 +23,7 @@ class LoginScreen extends React.Component
     			loggedIn: false,
     			havePic: false,
     			picUrl: true,
+			email: ''
 		}; 
 
 		// Try and load a local storage in
@@ -54,7 +55,9 @@ class LoginScreen extends React.Component
 			name: '',
     			loggedIn: false,
     			havePic: false,
-    			picUrl: true,
+    			picUrl: '',
+			email: ''
+
 		});
 	}
 
@@ -66,9 +69,10 @@ class LoginScreen extends React.Component
 			loggedIn: true,
 			havePic: true,
 			picUrl: response.picture.data.url,
+			email: response.email
 		});
 	
-		this.props.nameHandler(this.state.name);
+		this.props.nameHandler(this.state);
 		this.storeUser()
 	}
 
@@ -78,6 +82,7 @@ class LoginScreen extends React.Component
 			return;
 
 		var googleName = googleUser.getBasicProfile().getName();
+		var googleEmail = googleUser.getBasicProfile().getEmail();
 		var picUrl = googleUser.getBasicProfile().getImageUrl();
 
 
@@ -87,9 +92,10 @@ class LoginScreen extends React.Component
 			loggedIn: true,
 			havePic: true,
 			picUrl: picUrl,
+			email: googleEmail
 		});
 
-		this.props.nameHandler(this.state.name);
+		this.props.nameHandler(this.state);
 		this.storeUser()
 	}
 
