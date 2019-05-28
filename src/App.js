@@ -54,17 +54,18 @@ class App extends Component {
 	      </div>
 	    );
     } else {
-		  return (
-			  <div className='App'>
-			    <Router>
-			  	  <NavBar showSideBar={this.showSideBar} handleUsername={this.handleUsername} />
-			  	  <h1>Welcome to JPL Car Share</h1>
-			  	  <br/>
-			  	  <h2>Driving Innovation</h2>
-			    </Router>
-			  </div>
-		);
-  }
+        return (
+            <div className='App'>
+                <Router>
+                    <NavBar showSideBar={this.showSideBar} handleUsername={this.handleUsername} />
+                    <h1>Welcome to JPL Car Share</h1>
+                    <br/>
+                    <h2>Driving Innovation</h2>
+                </Router>
+            </div>
+        );
+        }
+    }
 }
 export default App;
 
