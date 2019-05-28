@@ -25,12 +25,16 @@ class CarList extends Component {
 	}
 
 	render(props) {
+		const classes  = this.props;
 		const carlist = this.state.cars.map((car)=>
 				<ListItem button onClick={() => this.selectCar(car)}>
 				<ListItemIcon>
 					<EventSeat />
 				</ListItemIcon>
 				<ListItemText 
+					classes={{
+						primary: classes.primary
+					}}
 					primary={car.make + " " + car.model}
 					secondary={car.distance.toFixed(2) + "km"}/>
 				<ListItemSecondaryAction>
@@ -40,15 +44,14 @@ class CarList extends Component {
 				);
 	
 		return (
-			
 			<Pane CarList
 				elevation={0}
 			    float="left"
 			    width={400}
 			    display="flex"
-			    flexDirection="column"
+				flexDirection="column"
 			>
-				<List component="Cars">
+				<List component="Cars" className = "test">
 					{carlist}
 				</List>
 			</Pane>
