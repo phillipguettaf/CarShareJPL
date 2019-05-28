@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, List, ListItem, ListItemIcon, ListItemText, ListItemSecondaryAction } from '@material-ui/core';
-import { EventSeat } from '@material-ui/icons';
+import { DirectionsCar } from '@material-ui/icons';
 import { Pane } from 'evergreen-ui';
 
 import './CarList.css';
@@ -29,7 +29,7 @@ class CarList extends Component {
 		const carlist = this.state.cars.map((car)=>
 				<ListItem button onClick={() => this.selectCar(car)}>
 				<ListItemIcon>
-					<EventSeat />
+					<DirectionsCar />
 				</ListItemIcon>
 				<ListItemText 
 					classes={{

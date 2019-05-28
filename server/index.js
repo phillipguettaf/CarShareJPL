@@ -60,7 +60,7 @@ app.post('/login', function (req, res) {
 });
 
 
-// Placeholder function for getting a list of cars
+// function for getting a list of cars
 app.post("/getcars", function(req, res) {
 	console.log('API Called for cars list');
 
@@ -79,33 +79,60 @@ app.post("/getcars", function(req, res) {
 	});
 });
 
+// To get previous bookings
+app.post("/getpreviousbookings", function(req, res) {
+    
+    var getPreviousBookings = "SELECT * FROM bookings INNER JOIN cars ON bookings.rego=cars.rego WHERE bookings.email = '" + req.body.user
+    + "'";
+    
+    connection.query(getPreviousBookings, function(error, results, fields) {
+        if (error) throw error;
+        console.log("Previous bookings fetched: ", results[0].rego);
+        res.json(results);
+    });
+});
+
+// To submit a booking
 app.post("/submitbooking", function(req, res) {
 
-	/*
-	 * Delete second "insert" to run completely
-	 * Currently returns an error: no 'start'
-	*/
-
-	var insert = "INSERT INTO bookings(created_at, updated_at, email, rego) VALUES ("
+	var insert = "INSERT INTO bookings(start, end, email, rego)"
+    + " VALUES ("
 	+ "CURRENT_TIMESTAMP(),"
 	+ "CURRENT_TIMESTAMP(),'"
 	+ req.body.user.email + "','"
 	+ req.body.car.rego 
-	+ "');";
-
-//	var insert = "select tab.table_schema as database_schema, tab.table_name as table_name, col.ordinal_position as column_id, col.column_name as column_name, col.data_type as data_type, case when col.numeric_precision is not null then col.numeric_precision else col.character_maximum_length end as max_length, case when col.datetime_precision is not null then col.datetime_precision when col.numeric_scale is not null then col.numeric_scale else 0 end as 'precision' from information_schema.tables as tab inner join information_schema.columns as col on col.table_schema = tab.table_schema and col.table_name = tab.table_name where tab.table_type = 'BASE TABLE' and tab.table_schema not in ('information_schema','mysql', 'performance_schema','sys') and tab.table_schema = 'JPL' order by tab.table_name, col.ordinal_position;"
+    + "')";
 
 	connection.query(insert, function (error, results, fields) {
-		
-		if (error) throw error;
+        // Insert the booking
+        if (error) throw error;
+        var getID =  "SELECT LAST_INSERT_ID() as id FROM bookings";
+        connection.query(getID, function (error, results, fields) {
+            // Get the booking's id
+            var id = results[0].id;
+            console.log("ID: ", id);
+            var getBooking = "SELECT * FROM bookings WHERE id = " + id;
+            connection.query(getBooking, function(error, results, fields) {
+                console.log('Booking submitted: number ', results[0].id);
+                // return booking to React
+                res.json(results);
+            });
+        });
+    });
+});
 
-		// Test output to console
-		console.log('Booking submitted ', results);
-			
-		// Dump array of rows to React
-		res.json("Car booked");
-
-	});
+app.post("/returncar", function(req, res) {
+    
+    connection.query("START TRANSACTION", function(error, results, fields) {
+        var updateBooking = "UPDATE bookings SET end = CURRENT_TIMESTAMP() WHERE id = '"
+        + req.body.id + "'"
+        connection.query(updateBooking, function(error, results, fields) {
+            connection.query("COMMIT", function(error, results, fields) {
+                console.log("Booking updated");
+                res.json({message: "Booking updated"});
+            });
+        });
+    });
 });
 
 
