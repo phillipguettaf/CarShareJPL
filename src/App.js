@@ -5,11 +5,8 @@ import MapApp from './MapApp'
 import Admin from './Admin'
 import TextBox from './TextBox'
 import Header from './Header'
-import SplashScreen from './SplashScreen'
-import MapApp from './MapApp';
 import NavBar from './navbar'
 import SplashScreen from './SplashScreen'
-import { BrowserRouter as Router } from 'react-router-dom';
 import { HttpsRedirect } from 'react-https-redirect';
 
 class App extends Component {

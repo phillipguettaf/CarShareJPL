@@ -23,7 +23,7 @@ constructor(props) {
 		    	<Toolbar>
 			  		<Button onClick={() => this.showSideBar()}>
             <Button>
-		  		<Link to='/admin'><MapIcon/></Link>
+		  		<Link to='/admin'>{/* <MapIcon/> */}</Link>
 		  	</Button>
 			  			<Menu/>
 			  		</Button>
