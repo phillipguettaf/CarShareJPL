@@ -16,11 +16,7 @@ class Paypal extends React.Component {
 		    console.log("The payment is all good!", payment);
 
 		    if (payment.paid === true) {
-			let hackString = "Thankyou for your purchase! All paid bro gg :^)\n"
-			    + "\nYou have paid a total of $" + total
-			    + "\nThe receipt will be emailed to " + payment.email;
-			alert(hackString)
-
+			// Just incase
 		    }
 		};
 
