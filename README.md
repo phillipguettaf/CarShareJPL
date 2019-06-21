@@ -1,6 +1,7 @@
-# 🚗JPL Car Share Project🚗
-<br>
+# JPL Car Share Project🚗
+
 [![Build Status](https://travis-ci.com/JackViney96/JPLCarShare.svg?token=GNspWJXsqsSBHQ67j6VK&branch=dev)](https://travis-ci.com/JackViney96/JPLCarShare)
+
 ## To get started working on this project 👩‍💻👩‍💻
 ### You will need
 This website can be developed on Windows, Mac and OSX, to get started you'll need NodeJS and Git installed :^)
