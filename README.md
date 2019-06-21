@@ -1,24 +1,58 @@
-# JPL Car Share Project
+# 🚗JPL Car Share Project🚗
+[![Build Status](https://travis-ci.com/JackViney96/JPLCarShare.svg?token=GNspWJXsqsSBHQ67j6VK&branch=dev)](https://travis-ci.com/JackViney96/JPLCarShare)
+
+## To get started working on this project 👩‍💻👩‍💻
+### You will need
+This website can be developed on Windows, Mac and OSX, to get started you'll need NodeJS and Git installed :^)
+### Get the source
+You can download the repository by running `git clone 'https://github.com/JackViney96/JPLCarShare.git'`
+### Install
+After that, you can <br>
+```cd JPLCarShare```
+into the source directory and run<br>
+```npm i```
+to install all of the dependencies<br>
+### Running
+Before we can go further you'll have to start the server, first enter the directory with<br>
+```cd server/```
+then run
+```node index.js```
+To get the server up and running, after that you can move back up to the top directory with<br>
+```cd ..```
+You'll then be able to spin up the dev build by running<br>
+```npm run client```>
+And then your browser should open to `http://localhost:3000` where you'll be greeted with the site.🎉🎉<br>
 
 
-![alt text](https://media.istockphoto.com/photos/car-pooling-picture-id153070090?k=6&m=153070090&s=612x612&w=0&h=NAL9-mCW70t5Rtj5pW2I3TQEpRlNhY2rRUHYa2kcx6o= "Placeholder")
+## Deploying the app to Google Cloud ☁️☁️
+### Travis
+If this repository is connected to Travis, it will automatically build and deploy anything pushed to the `cloud` branch
+### Manual builds 
+#### Requirements
+Requires an authorized Google Cloud account connected to the gcloud tool on your computer
+#### Instructions
+The API and Front End run on different Google App Engine services. To deploy the API, simply run<br>
+```gcloud app deploy```
+from the `server/` directory<br>
+The front end first has to be built, which can be done by running<br>
+```npm run build```
+from the project root, followed by<br>
+```gcloud app deploy```
+to push it up to App Engine. Within 30 minutes the build should be live.🎉🎉
 
-## Running the app
-### To run the front end, type `npm start` in the root directory
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Built With 💖 and
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
-
-### To run the backend, open the `server/` folder and run `node index.js`
-
-This will launch the backend server
+* [ReactJS](https://reactjs.org/) - Amazing front end framework 🤯
+* [NodeJS](https://nodejs.org/) - Helped us build a great backend quickly 👩‍💻
+* [Travis-CI](https://travis-ci.com) - Allowed us to quickly build and deploy our work ⏩
+* [MariaDB](https://mariadb.org/) - Allowed us to store our data with speed and style 😎
+* [Google Cloud](https://google.com/) - Allowed us to affordably host our solution ☁️
 
 
-## Learn More
+## Authors
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+* **Phillip Guettaf**
+* **Jack Viney**
+* **Liam Wright**
+* **Blaise Saunders**
