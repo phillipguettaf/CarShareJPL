@@ -71,7 +71,7 @@ class App extends Component {
                     
                     <div className="App">
                         <Router>
-                            <NavBar loggedIn={this.state.userName} admin={this.state.admin} enableAdmin={this.enable_admin} showSideBar={this.showSideBar} handleUsername={this.handleUsername} />
+                            <NavBar isLoggedIn={this.state.userName} admin={this.state.admin} enableAdmin={this.enable_admin} showSideBar={this.showSideBar} handleUsername={this.handleUsername} />
                             <Admin/>
                         </Router>
                     </div>
@@ -84,7 +84,7 @@ class App extends Component {
                     
                     <div className="App">
                         <Router>
-                            <NavBar loggedIn={this.state.userName} admin={this.state.admin} enableAdmin={this.enable_admin} showSideBar={this.showSideBar} handleUsername={this.handleUsername} />
+                            <NavBar isLoggedIn={this.state.userName} admin={this.state.admin} enableAdmin={this.enable_admin} showSideBar={this.showSideBar} handleUsername={this.handleUsername} />
                             <MapApp loggedIn={true} admin={this.state.admin} sideBarShown={this.state.sideBarShown} hideSideBar={this.hideSideBar} user={this.state.userEmail}/>
                         </Router>
                     </div>
@@ -96,7 +96,7 @@ class App extends Component {
               
                     <div className="App">
                         <Router>
-                        <NavBar loggedIn={this.state.userName} admin={this.state.admin} enableAdmin={this.enable_admin} showSideBar={this.showSideBar} handleUsername={this.handleUsername} />
+                            <NavBar isLoggedIn={this.state.userName} admin={this.state.admin} enableAdmin={this.enable_admin} showSideBar={this.showSideBar} handleUsername={this.handleUsername} />
                         <SplashScreen />
                       </Router>
                     </div>

@@ -27,7 +27,7 @@ class NavBar extends Component {
 		else
 			icon = <Build />;
 
-		if (this.props.loggedIn)
+		if (this.props.isLoggedIn)
 		{
 			return (
 				<AppBar position="static" color="primary">
