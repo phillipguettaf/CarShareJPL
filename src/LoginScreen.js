@@ -24,7 +24,7 @@ class LoginScreen extends React.Component
     			havePic: false,
     			picUrl: true,
 			email: ''
-		}; 
+		};
 
 		// Check local storage for a cookie saying the user is already logged in
 		var user = localStorage.getItem('userstate')
@@ -34,7 +34,7 @@ class LoginScreen extends React.Component
 			this.state = user
 		}
 
-	
+
 	}
 
 	// Stores a cookie saying the user is logged in
@@ -73,13 +73,13 @@ class LoginScreen extends React.Component
 			picUrl: response.picture.data.url,
 			email: response.email
 		});
-	
+
 		this.props.nameHandler(this.state);
 		this.storeUser()
 	}
 
 	// Called if user logs in via google
-	responseGoogle(googleUser) 
+	responseGoogle(googleUser)
 	{
 		if (!googleUser.isSignedIn())
 			return;
@@ -122,9 +122,9 @@ class LoginScreen extends React.Component
 					<div class='login'>
 						<img src={ this.state.picUrl } alt="User Profile" class='profilePic' height='60px' />
 						<span class='loginText'>
-							
-							Logged in as { printName }   
-						
+
+							Logged in as { printName }
+
 							<Button color="secondary" className='logout' onClick={this.logoutFunc}>
 								Logout
 							</Button>
@@ -171,4 +171,3 @@ class LoginScreen extends React.Component
 }
 
 export default LoginScreen;
-
