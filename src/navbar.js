@@ -27,20 +27,34 @@ class NavBar extends Component {
 		else
 			icon = <Build />;
 
-		return (
-			<AppBar position="static" color="primary">
-				<Toolbar>
-						
-						<Button onClick={() => this.showSideBar()}>
-							<Menu/>
-						</Button>
-						<Button onClick={() => this.props.enableAdmin()}>
-							{icon}
-						</Button>
-						<LoginScreen nameHandler={this.props.handleUsername} />
-				</Toolbar>
-			</AppBar>
-		);
+		if (this.props.loggedIn)
+		{
+			return (
+				<AppBar position="static" color="primary">
+					<Toolbar>
+							
+							<Button onClick={() => this.showSideBar()}>
+								<Menu/>
+							</Button>
+							<Button onClick={() => this.props.enableAdmin()}>
+								{icon}
+							</Button>
+							<LoginScreen nameHandler={this.props.handleUsername} />
+					</Toolbar>
+				</AppBar>
+			);
+		}
+		else
+		{
+			return (
+				<AppBar position="static" color="primary">
+					<Toolbar>
+							<LoginScreen nameHandler={this.props.handleUsername} />
+					</Toolbar>
+				</AppBar>
+			);
+		}
+
 	}
 }
 
