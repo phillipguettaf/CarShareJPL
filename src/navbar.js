@@ -13,10 +13,6 @@ class NavBar extends Component {
 		super(props);
 	}
 
-	showSideBar() {
-		return this.props.showSideBar();
-	}
-
 	render(props) {
 
 
@@ -25,7 +21,7 @@ class NavBar extends Component {
 			<AppBar position="static" color="primary">
 				<Toolbar>
 						
-						<NavButtons  isLoggedIn={this.props.isLoggedIn} admin={this.props.admin} enableAdmin={this.props.enableAdmin} showSideBar={this.showSideBar} />
+						<NavButtons  isLoggedIn={this.props.isLoggedIn} admin={this.props.admin} enableAdmin={this.props.enableAdmin} showSideBar={this.props.showSideBar} />
 						<LoginScreen nameHandler={this.props.handleUsername} />
 				</Toolbar>
 			</AppBar>

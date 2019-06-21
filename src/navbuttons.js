@@ -15,10 +15,6 @@ class NavButtons extends Component {
 		super(props);
 	}
 
-	showSideBar() {
-		return this.props.showSideBar();
-	}
-
 	render(props) {
 		let icon;
 		if (this.props.admin)
@@ -30,7 +26,7 @@ class NavButtons extends Component {
 		{
 			return(
 			<div>
-				<Button onClick={() => this.showSideBar()}>
+				<Button onClick={() => this.props.showSideBar()}>
 					<Menu/>
 				</Button>
 				<Button onClick={() => this.props.enableAdmin()}>
