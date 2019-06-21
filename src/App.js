@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Route, Link, Redirect} from 'react-router-dom'
 import MapApp from './MapApp'
 import Admin from './Admin'
 import TextBox from './TextBox'
-import Header from './Header'
 import NavBar from './navbar'
 import SplashScreen from './SplashScreen'
 import { HttpsRedirect } from 'react-https-redirect';
