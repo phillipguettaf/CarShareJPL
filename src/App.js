@@ -63,6 +63,7 @@ class App extends Component {
     // TODO: Tidy
     render() {
         
+        // Check what to render based off if the user is logged in or not
         if (this.state.userName) {
             // Render the admin page if requested
             if (this.state.admin)
@@ -78,6 +79,7 @@ class App extends Component {
                 
             );
             }
+            // Otherwise render the map page
             else
             {
                 return (
@@ -91,6 +93,7 @@ class App extends Component {
                     
                 );
             }
+        // If the user's not logged in, just give them the splash screen
         } else {
             return (
               

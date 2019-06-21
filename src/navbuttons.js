@@ -16,12 +16,17 @@ class NavButtons extends Component {
 	}
 
 	render(props) {
+		
+		// If the user is in the admin section, render a back arrow
+		// otherwise render the icon for the admin section
 		let icon;
 		if (this.props.admin)
 			icon = <ArrowBack />;
 		else
 			icon = <Build />;
 
+		
+		// Hide the buttons for users that aren't logged in yet
 		if (this.props.isLoggedIn)
 		{
 			return(

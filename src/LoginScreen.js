@@ -26,9 +26,8 @@ class LoginScreen extends React.Component
 			email: ''
 		}; 
 
-		// Try and load a local storage in
+		// Check local storage for a cookie saying the user is already logged in
 		var user = localStorage.getItem('userstate')
-
 		if (user)
 		{
 			user = JSON.parse(user)
@@ -38,6 +37,7 @@ class LoginScreen extends React.Component
 	
 	}
 
+	// Stores a cookie saying the user is logged in
 	storeUser()
 	{
 		console.log(this.state)
@@ -47,6 +47,7 @@ class LoginScreen extends React.Component
 	}
 
 
+	// Does what it says on the box
 	logoutFunc()
 	{
 		localStorage.removeItem('userstate')
@@ -62,6 +63,7 @@ class LoginScreen extends React.Component
 	}
 
 
+	// Called if user logs in via facebook
 	responseFacebook(response)
 	{
 		this.setState({
@@ -76,6 +78,7 @@ class LoginScreen extends React.Component
 		this.storeUser()
 	}
 
+	// Called if user logs in via google
 	responseGoogle(googleUser) 
 	{
 		if (!googleUser.isSignedIn())
@@ -99,6 +102,7 @@ class LoginScreen extends React.Component
 		this.storeUser()
 	}
 
+	// Called in case of a failed login, could be expanded
 	loginFailed()
 	{
 		return
@@ -106,11 +110,10 @@ class LoginScreen extends React.Component
 
 	render(props)
 	{
-
 		let printName = this.state.name;
-
 		var FontAwesome = require('react-fontawesome');
 
+		// If the user is logged in, render their profile and a logout button
 		if (this.state.loggedIn)
 		{
 			if (this.state.havePic)
@@ -133,10 +136,14 @@ class LoginScreen extends React.Component
 				return (
 					<div class='login'>
 						<h3> Logged in as { printName } </h3>
+						<Button color="secondary" className='logout' onClick={this.logoutFunc}>
+								Logout
+						</Button>
 					</div>
 				)
 			}
 		}
+		// Otherwise give the user some login buttons
 		else
 			return (
 				<div class='login'>

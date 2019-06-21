@@ -14,13 +14,10 @@ class NavBar extends Component {
 	}
 
 	render(props) {
-
-
-
+		// The NavButtons component renders the buttons in the top left for the admin console and sidebar
 		return (
 			<AppBar position="static" color="primary">
 				<Toolbar>
-						
 						<NavButtons  isLoggedIn={this.props.isLoggedIn} admin={this.props.admin} enableAdmin={this.props.enableAdmin} showSideBar={this.props.showSideBar} />
 						<LoginScreen nameHandler={this.props.handleUsername} />
 				</Toolbar>

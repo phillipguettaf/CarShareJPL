@@ -18,6 +18,7 @@ class SplashScreen extends Component
 	}
 
 
+	// Basic HTML Splash page describing the site
 	render(props)
 	{
 		return (
