@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Link, Redirect} from 'react-router-dom';
-import MapApp from './MapApp'
 import Admin from './Admin'
 import TextBox from './TextBox'
 import Header from './Header'
 import SplashScreen from './SplashScreen'
 import MapApp from './MapApp';
 import NavBar from './navbar'
-import SplashScreen from './SplashScreen'
-import { BrowserRouter as Router } from 'react-router-dom';
 import { HttpsRedirect } from 'react-https-redirect';
 
 class App extends Component {
@@ -52,7 +49,6 @@ class App extends Component {
     render() {
         if (this.state.userName) {
             return (
-                
                   <div className="App">
                       <Router>
                           <NavBar showSideBar={this.showSideBar} handleUsername={this.handleUsername} />
@@ -63,7 +59,6 @@ class App extends Component {
             );
         } else {
             return (
-              
                     <div className="App">
                         <Router>
                         <NavBar showSideBar={this.showSideBar} handleUsername={this.handleUsername} />

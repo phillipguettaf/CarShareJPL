@@ -22,11 +22,11 @@ constructor(props) {
 			<AppBar position="static" color="primary">
 		    	<Toolbar>
 			  		<Button onClick={() => this.showSideBar()}>
-            <Button>
-		  		<Link to='/admin'><MapIcon/></Link>
-		  	</Button>
 			  			<Menu/>
 			  		</Button>
+            <Button>
+		  		<Link to='/admin'>AdminConsole</Link>
+		  	</Button>
                     <LoginScreen nameHandler={this.props.handleUsername} />
                 </Toolbar>
 			</AppBar>

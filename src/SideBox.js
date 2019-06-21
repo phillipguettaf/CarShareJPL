@@ -17,7 +17,8 @@ class SideBox extends Component {
 
 	renderCurrentBookingBox() {
 		if (this.props.currentBooking) {
-            var booking = this.props.currentBooking;
+            var booking = this.props.currentBooking[0];
+	    console.log(booking)
             return(
                 <Card
                 backgroundColor="white"
@@ -29,8 +30,9 @@ class SideBox extends Component {
                 flexDirection="column"
                 >
                 <Heading>
+		    Car Booked :^) <br/>
                     {booking.rego} <br/>
-                    @ {booking.start}
+                    {booking.start}
                 </Heading>
                 <br/>
                 <Button onClick={() => this.endBooking()}>
